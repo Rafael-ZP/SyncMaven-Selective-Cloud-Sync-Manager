@@ -10,6 +10,8 @@ import SwiftUI
 
 struct DrivePickerView: View {
     @Binding var selected: DriveFolder?
+    var onSave: () -> Void
+    var onCancel: () -> Void
     @State private var folders: [DriveFolder] = []
     @State private var loading = true
 
@@ -37,20 +39,21 @@ struct DrivePickerView: View {
                     }
                 }
             }
-
+            Divider()
             HStack {
+                Button("Cancel") { onCancel() }
                 Spacer()
-                Button("Close") {
-                    NSApp.keyWindow?.close()
-                }
+                Button("Save") { onSave() }
+                    .keyboardShortcut(.defaultAction)
             }
-            .padding(.top, 8)
+            .padding()
         }
         .padding(20)
         .frame(width: 400, height: 500)
         .onAppear {
             loadFolders()
         }
+        
     }
 
     func loadFolders() {

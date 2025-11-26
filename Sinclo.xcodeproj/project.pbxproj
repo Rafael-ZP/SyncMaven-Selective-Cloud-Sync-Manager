@@ -36,9 +36,33 @@
 		FFC2936D2ED6FDA9009B46EB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FFC293812ED70D21009B46EB /* Exceptions for "Sinclo" folder in "Sinclo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Core/.swift,
+			);
+			target = FFBCB58A2ED49DB900C4B848 /* Sinclo */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		FFC293822ED70D21009B46EB /* Exceptions for "Sinclo" folder in "Compile Sources" phase from "Sinclo" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = FFBCB5872ED49DB900C4B848 /* Sources */;
+			membershipExceptions = (
+				Core/.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FFBCB58D2ED49DB900C4B848 /* Sinclo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FFC293812ED70D21009B46EB /* Exceptions for "Sinclo" folder in "Sinclo" target */,
+				FFC293822ED70D21009B46EB /* Exceptions for "Sinclo" folder in "Compile Sources" phase from "Sinclo" target */,
+			);
 			path = Sinclo;
 			sourceTree = "<group>";
 		};

@@ -61,7 +61,15 @@ final class SyncManager: ObservableObject {
         }
         return false
     }
-
+    // inside SyncManager class
+    func stopMonitoring(folder: WatchedFolder) {
+        if let m = monitors[folder.id] {
+            m.stop()
+            monitors.removeValue(forKey: folder.id)
+            AppState.shared.log("Stopped monitoring: \(folder.localPath)")
+        }
+    }
+    
     // MARK: Upload queue
     func enqueueUpload(_ localURL: URL) {
         uploadQueue.async {

@@ -13,7 +13,7 @@
 - Provide an Xcode-ready `Package.swift` and minimal project files to import into Xcode. (I can generate that next.)
 - Replace `DispatchSource` with `FSEvents` for recursive folder tree watching.
 - Add SecurityScopedBookmark support to persist permission to watch arbitrary user folders across launches.
-- Add conflict resolution UI and sync status table in the menubar UI.
+- Add conflict resolution UI and snc status table in the menubar UI.
 
 
 ---

@@ -1,3 +1,11 @@
+//
+//  WatchedFoldersTab.swift
+//  Sinclo
+//
+//  Created by Rafael Zieganpalg on 26/11/25.
+//
+
+
 import SwiftUI
 
 struct WatchedFoldersTab: View {
@@ -33,10 +41,14 @@ struct WatchedFoldersTab: View {
         }
     }
 }
+// Replace WatchedFolderRow in WatchedFoldersTab.swift with this code block
 
 struct WatchedFolderRow: View {
     @ObservedObject var folder: WatchedFolder
     @State private var showingPicker = false
+
+    @State private var folderUploads: [UploadRecord] = []
+    @ObservedObject private var uploadManager = UploadManager.shared
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -69,12 +81,13 @@ struct WatchedFolderRow: View {
                 Spacer()
 
                 Button(action: {
-                    // quick upload test: scan immediate files and enqueue
+                    // quick scan & enqueue (this will create UploadRecords)
                     let url = URL(fileURLWithPath: folder.localPath)
                     if let items = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil) {
                         for item in items {
                             if SyncManager.shared.fileMatchesRule(item, folder: folder) {
-                                SyncManager.shared.enqueueUpload(item)
+                                let parentID = folder.driveFolder?.id
+                                UploadManager.shared.startUpload(localURL: item, folderLocalPath: folder.localPath, parentDriveID: parentID)
                             }
                         }
                     }
@@ -82,18 +95,54 @@ struct WatchedFolderRow: View {
                     Text("Scan & Upload")
                 }
             }
+
+            // Upload list for this folder
+            if !uploadManager.uploadsForFolder(path: folder.localPath).isEmpty {
+                VStack(alignment: .leading, spacing: 6) {
+                    ForEach(uploadManager.uploadsForFolder(path: folder.localPath)) { rec in
+                        HStack {
+                            Text(rec.localURL.lastPathComponent)
+                                .lineLimit(1)
+                                .font(.system(size: 12))
+                            Spacer()
+                            if rec.state == .uploading {
+                                ProgressView(value: rec.progress)
+                                    .frame(width: 140)
+                            } else if rec.state == .pending {
+                                Text("Queued").font(.caption)
+                            } else if rec.state == .completed {
+                                Text("Done").font(.caption).foregroundColor(.green)
+                            } else {
+                                // failed
+                                Text("Failed").font(.caption).foregroundColor(.red)
+                                Button("Retry") {
+                                    UploadManager.shared.retry(recordID: rec.id)
+                                }
+                            }
+                        }
+                    }
+                }
+                .padding(.top, 6)
+            }
         }
         .sheet(isPresented: $showingPicker) {
-            DrivePickerView(selected: Binding(
-                get: { folder.driveFolder },
-                set: { new in
-                    folder.driveFolder = new
-                    folder.driveFolderName = new?.name
-                    // persist changes
-                    AppState.shared.log("Set Drive folder for \(folder.localPath) → \(new?.name ?? "nil")")
-                    Persistence.shared.saveWatchedFolders(AppState.shared.watchedFolders)
-                })
+            DrivePickerView(
+                selected: Binding(
+                    get: { folder.driveFolder },
+                    set: { newValue in
+                        folder.driveFolder = newValue
+                        folder.driveFolderName = newValue?.name
+                    }
+                ),
+                onSave: {
+                    AppState.shared.updateFolder(folder)
+                    showingPicker = false
+                },
+                onCancel: {
+                    showingPicker = false
+                }
             )
         }
     }
 }
+

@@ -1,3 +1,11 @@
+//
+//  AppWindowView.swift
+//  Sinclo
+//
+//  Created by Rafael Zieganpalg on 26/11/25.
+//
+
+
 import SwiftUI
 
 struct AppWindowView: View {
@@ -27,7 +35,7 @@ struct AppWindowView: View {
                 .frame(width: 150)
             }
             .padding(.horizontal, 16)
-            .padding(.top, 14)
+            .padding(.top, 14).padding(.bottom, 14)
 
             Divider()
 
