@@ -1,44 +1,47 @@
 //
 //  LogsTab.swift
-//  Sinclo
 //
-//  Created by Rafael Zieganpalg on 26/11/25.
-//
-
 
 import SwiftUI
 
 struct LogsTab: View {
-    @EnvironmentObject var app: AppState
+    @ObservedObject private var app = AppState.shared
+    @State private var scrollID = UUID()
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 12) {
+
             HStack {
-                Text("Logs").font(.headline)
+                Text("Logs")
+                    .font(.title2)
+                    .bold()
+
                 Spacer()
-                Button("Clear") { app.logs.removeAll() }
-                Button("Export") { exportLogs() }
+
+                Button("Clear Logs") {
+                    app.logs.removeAll()
+                }
             }
 
-            ScrollView {
-                VStack(alignment: .leading, spacing: 6) {
-                    ForEach(app.logs, id: \.self) { line in
-                        Text(line)
-                            .font(.system(size: 11, design: .monospaced))
-                            .frame(maxWidth: .infinity, alignment: .leading)
+            Divider()
+
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 4) {
+                        ForEach(app.logs, id: \.self) { log in
+                            Text(log)
+                                .font(.system(size: 12, design: .monospaced))
+                        }
+                    }
+                    .onChange(of: app.logs.count) { _ in
+                        if let last = app.logs.last {
+                            withAnimation { proxy.scrollTo(last, anchor: .bottom) }
+                        }
                     }
                 }
-            }.frame(minHeight: 320)
-        }
-    }
+            }
 
-    func exportLogs() {
-        let savePanel = NSSavePanel()
-        savePanel.nameFieldStringValue = "sinclo-logs.txt"
-        savePanel.begin { resp in
-            guard resp == .OK, let url = savePanel.url else { return }
-            let text = app.logs.joined(separator: "\n")
-            try? text.write(to: url, atomically: true, encoding: .utf8)
+            Spacer()
         }
     }
 }

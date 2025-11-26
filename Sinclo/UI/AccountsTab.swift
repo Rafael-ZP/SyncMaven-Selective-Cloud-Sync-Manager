@@ -1,81 +1,52 @@
 //
 //  AccountsTab.swift
-//  Sinclo
 //
-//  Created by Rafael Zieganpalg on 26/11/25.
-//
-
 
 import SwiftUI
 
 struct AccountsTab: View {
-    @StateObject private var mgr = AccountManager.shared
-    @EnvironmentObject var app: AppState
-    @State private var adding = false
+    @ObservedObject private var manager = AccountManager.shared
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 16) {
+
             HStack {
-                Text("Accounts").font(.headline)
+                Text("Accounts")
+                    .font(.title2)
+                    .bold()
+
                 Spacer()
-                Button(action: { adding = true }) {
-                    Label("Add Account", systemImage: "person.crop.circle.badge.plus")
+
+                Button {
+                    manager.addAccount { _ in }
+                } label: {
+                    Label("Add Account", systemImage: "plus.circle")
                 }
             }
 
+            Divider()
+
             List {
-                ForEach(mgr.accounts, id: \.id) { acc in
+                ForEach(manager.accounts) { acc in
                     HStack {
+                        Image(systemName: "person.crop.circle")
+                            .font(.system(size: 30))
                         VStack(alignment: .leading) {
-                            Text(acc.email).font(.subheadline)
-                            Text(acc.id).font(.caption).foregroundColor(.secondary)
+                            Text(acc.email)
+                            Text("ID: \(acc.id)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                         }
                         Spacer()
                         Button("Remove") {
-                            mgr.remove(account: acc)
+                            manager.remove(account: acc)
                         }
                     }
+                    .padding(.vertical, 4)
                 }
             }
-            .frame(minHeight: 300)
 
-            HStack {
-                Spacer()
-                Button("Refresh Accounts") { mgr.reload() }
-            }
+            Spacer()
         }
-        .sheet(isPresented: $adding) {
-            AddAccountView(isPresented: $adding)
-        }
-    }
-}
-
-struct AddAccountView: View {
-    @Binding var isPresented: Bool
-    @StateObject private var mgr = AccountManager.shared
-    @State private var working = false
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Add Google Account").font(.title2).bold()
-            Text("This will open your browser to sign in and grant Sinclo Drive access.")
-                .font(.subheadline)
-            if working { ProgressView("Waiting for authorization…").padding(.top, 10) }
-            HStack {
-                Spacer()
-                Button("Cancel") { isPresented = false }
-                Button("Sign in") {
-                    working = true
-                    mgr.addAccount { res in
-                        DispatchQueue.main.async {
-                            working = false
-                            isPresented = false
-                        }
-                    }
-                }.keyboardShortcut(.defaultAction)
-            }
-        }
-        .padding(20)
-        .frame(width: 480, height: 180)
     }
 }
