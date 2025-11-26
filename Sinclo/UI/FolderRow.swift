@@ -37,7 +37,23 @@ struct FolderRow: View {
         }
         .padding(6)
         .sheet(isPresented: $showDrivePicker) {
-            DrivePickerView(selected: $folder.driveFolder)
+            DrivePickerView(
+                selected: Binding(
+                    get: { folder.driveFolder },
+                    set: { newValue in
+                        folder.driveFolder = newValue
+                        folder.driveFolderName = newValue?.name
+                    }
+                ),
+                onSave: {
+                    // persist changes
+                    AppState.shared.updateFolder(folder)
+                    showDrivePicker = false
+                },
+                onCancel: {
+                    showDrivePicker = false
+                }
+            )
         }
     }
 }

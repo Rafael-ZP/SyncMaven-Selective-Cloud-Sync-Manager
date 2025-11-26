@@ -1,3 +1,11 @@
+//
+//  AccountsTab.swift
+//  Sinclo
+//
+//  Created by Rafael Zieganpalg on 26/11/25.
+//
+
+
 import SwiftUI
 
 struct AccountsTab: View {
