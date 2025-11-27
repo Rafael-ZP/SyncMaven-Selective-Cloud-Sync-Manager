@@ -1,10 +1,25 @@
 import Foundation
 
-struct Rule: Codable {
-    var minSizeMB: UInt64? // optional
-    var maxSizeMB: UInt64? // optional
+enum SizeUnit: String, Codable, CaseIterable {
+    case kb = "KB"
+    case mb = "MB"
+    case gb = "GB"
+
+    var multiplier: UInt64 {
+        switch self {
+        case .kb: return 1024
+        case .mb: return 1024 * 1024
+        case .gb: return 1024 * 1024 * 1024
+        }
+    }
+}
+
+struct Rule: Codable, Identifiable {
+    let id = UUID()
+    var lowerBound: UInt64 = 0
+    var upperBound: UInt64 = 100
+    var unit: SizeUnit = .mb
     var allowedExtensions: [String]?
-    var treatFolderAsUnit: Bool = false
 }
 
 struct SyncTask: Identifiable {

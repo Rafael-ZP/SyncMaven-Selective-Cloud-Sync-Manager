@@ -1,96 +1,101 @@
-//
-//  WatchedFolderRow.swift
-//  Sinclo
-//
-//  Created by Rafael Zieganpalg on 26/11/25.
-//
-
-
-//
-//  WatchedFolderRow.swift
-//
-
-import SwiftUI
+internal import SwiftUI
 
 struct WatchedFolderRow: View {
     @ObservedObject var folder: WatchedFolder
     @State private var showDrivePicker = false
-    @ObservedObject private var uploadManager = UploadManager.shared
+    @StateObject private var uploadManager = UploadManager.shared
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading) {
+            HStack(spacing: 15) {
+                Image(systemName: "folder.fill")
+                    .font(.title)
+                    .foregroundColor(.accentColor)
 
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(folder.localPath)
-                        .font(.subheadline)
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(folder.localPath.removingPercentEncoding ?? folder.localPath)
+                        .fontWeight(.medium)
                         .lineLimit(1)
-                    Text("Drive folder: \(folder.driveFolderName ?? "Not chosen")")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                    
+                    HStack {
+                        Image(systemName: "g.circle.fill")
+                            .foregroundColor(.gray)
+                        Text(folder.driveFolderName ?? "No Drive folder selected")
+                            .foregroundColor(.secondary)
+                            .lineLimit(1)
+                    }
+                    .font(.caption)
                 }
 
                 Spacer()
 
-                Toggle("", isOn: $folder.enabled)
+                HStack(spacing: 20) {
+                    Button("Rules") {
+                        showRulesEditor = true
+                    }
+
+                    Button(action: { showDrivePicker = true }) {
+                        Image(systemName: "icloud.and.arrow.up")
+                        Text("Change")}
+                            .onAppear {
+                                // Auto-fix invalid accountID
+                                if !AccountManager.shared.accounts.contains(where: { $0.id == folder.accountID }) {
+                                    folder.accountID = AccountManager.shared.accounts.first?.id ?? ""
+                                    AppState.shared.updateFolder(folder)
+                                }
+                            }
+
+                    Toggle(isOn: $folder.enabled) {
+                        Text("")
+                    }
                     .toggleStyle(SwitchToggleStyle())
                     .onChange(of: folder.enabled) { _ in
                         AppState.shared.updateFolder(folder)
                     }
-            }
-
-            HStack(spacing: 16) {
-
-                VStack(alignment: .leading) {
-                    Text("Max size (MB)")
-                    TextField("200", value: $folder.maxSizeMB, formatter: NumberFormatter())
-                        .frame(width: 80)
-                        .onChange(of: folder.maxSizeMB) { _ in
-                            AppState.shared.updateFolder(folder)
-                        }
-                }
-
-                Button(folder.driveFolderName ?? "Choose Drive Folder") {
-                    showDrivePicker = true
                 }
             }
-
-            // Uploads list
+            
             let uploads = uploadManager.uploadsForFolder(path: folder.localPath)
-
             if !uploads.isEmpty {
-                Divider()
+                Divider().padding(.top, 8)
                 VStack(alignment: .leading, spacing: 4) {
-                    ForEach(uploads) { rec in
+                    ForEach(uploads) { upload in
                         HStack {
-                            Text(rec.localURL.lastPathComponent)
-                                .font(.system(size: 12))
-                                .lineLimit(1)
-
+                            Text(upload.localURL.lastPathComponent)
+                                .font(.caption)
+                            
                             Spacer()
-
-                            switch rec.state {
-                            case .uploading:
-                                ProgressView(value: rec.progress)
-                                    .frame(width: 140)
+                            
+                            switch upload.state {
                             case .pending:
-                                Text("Pending").font(.caption)
+                                Text("Queued")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            case .uploading:
+                                ProgressView(value: upload.progress)
+                                    .frame(width: 100)
+                                    .drawingGroup()
                             case .completed:
-                                Text("Done").font(.caption).foregroundColor(.green)
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
                             case .failed:
-                                Text("Failed").font(.caption).foregroundColor(.red)
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.red)
                                 Button("Retry") {
-                                    UploadManager.shared.retry(recordID: rec.id)
+                                    uploadManager.retry(recordID: upload.id)
                                 }
+                                .font(.caption)
                             }
                         }
                     }
                 }
-                .padding(.top, 6)
+                .padding(.top, 8)
             }
         }
+        .padding(.vertical, 8)
         .sheet(isPresented: $showDrivePicker) {
             DrivePickerView(
+                selectedAccountID: $folder.accountID,
                 selected: Binding(
                     get: { folder.driveFolder },
                     set: {
@@ -107,5 +112,12 @@ struct WatchedFolderRow: View {
                 }
             )
         }
+        .sheet(isPresented: $showRulesEditor) {
+            RulesListView(rules: $folder.rules) {
+                AppState.shared.updateFolder(folder)
+                showRulesEditor = false
+            }
+        }
     }
+    @State private var showRulesEditor = false
 }

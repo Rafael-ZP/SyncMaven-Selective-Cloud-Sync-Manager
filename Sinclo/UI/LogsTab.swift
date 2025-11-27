@@ -1,47 +1,28 @@
-//
-//  LogsTab.swift
-//
-
-import SwiftUI
+internal import SwiftUI
 
 struct LogsTab: View {
-    @ObservedObject private var app = AppState.shared
-    @State private var scrollID = UUID()
+    @StateObject var app = AppState.shared
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-
-            HStack {
-                Text("Logs")
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 14) {
+                Text("Activity Log")
                     .font(.title2)
                     .bold()
+                    .padding(.bottom, 10)
 
-                Spacer()
-
-                Button("Clear Logs") {
-                    app.logs.removeAll()
-                }
-            }
-
-            Divider()
-
-            ScrollViewReader { proxy in
                 ScrollView {
                     VStack(alignment: .leading, spacing: 4) {
                         ForEach(app.logs, id: \.self) { log in
                             Text(log)
-                                .font(.system(size: 12, design: .monospaced))
-                        }
-                    }
-                    .onChange(of: app.logs.count) { _ in
-                        if let last = app.logs.last {
-                            withAnimation { proxy.scrollTo(last, anchor: .bottom) }
+                                .font(.system(.body, design: .monospaced))
+                                .padding(.vertical, 2)
                         }
                     }
                 }
+                .frame(height: geometry.size.height * 0.8)
             }
-
-            Spacer()
+            .padding()
         }
     }
 }

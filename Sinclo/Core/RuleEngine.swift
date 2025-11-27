@@ -5,10 +5,12 @@ final class RuleEngine {
         do {
             let attrs = try FileManager.default.attributesOfItem(atPath: fileURL.path)
             guard let fileSize = attrs[.size] as? UInt64 else { return false }
-            let sizeMB = fileSize / (1024 * 1024)
 
-            if let min = rule.minSizeMB, sizeMB < min { return false }
-            if let max = rule.maxSizeMB, sizeMB > max { return false }
+            let lowerBoundBytes = rule.lowerBound * rule.unit.multiplier
+            let upperBoundBytes = rule.upperBound * rule.unit.multiplier
+
+            if fileSize < lowerBoundBytes { return false }
+            if fileSize > upperBoundBytes { return false }
 
             if let exts = rule.allowedExtensions, !exts.isEmpty {
                 let fileExt = fileURL.pathExtension.lowercased()

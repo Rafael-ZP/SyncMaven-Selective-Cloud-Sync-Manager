@@ -1,38 +1,24 @@
-//
-//  KeychainHelper.swift
-//  Sinclo
-//
-//  Created by Rafael Zieganpalg on 26/11/25.
-//
-
-
-// KeychainHelper.swift
-// Very small wrapper for storing Data in Keychain
-
 import Foundation
 import Security
 
 final class KeychainHelper {
     static let shared = KeychainHelper()
-
     private init() {}
 
-    @discardableResult
-    func save(data: Data, service: String, account: String) -> Bool {
-        delete(service: service, account: account) // replace if exists
-
+    // Save Data
+    func save(data: Data, service: String, account: String) {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
             kSecAttrAccount as String: account,
-            kSecValueData as String: data,
-            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
+            kSecValueData as String: data
         ]
-        let status = SecItemAdd(query as CFDictionary, nil)
-        return status == errSecSuccess
+        SecItemDelete(query as CFDictionary)
+        SecItemAdd(query as CFDictionary, nil)
     }
 
-    func read(service: String, account: String) -> Data? {
+    // Load Data
+    func load(service: String, account: String) -> Data? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
@@ -42,20 +28,17 @@ final class KeychainHelper {
         ]
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
-        if status == errSecSuccess {
-            return result as? Data
-        }
-        return nil
+        guard status == errSecSuccess else { return nil }
+        return result as? Data
     }
 
-    @discardableResult
-    func delete(service: String, account: String) -> Bool {
+    // Delete
+    func delete(service: String, account: String) {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
-            kSecAttrAccount as String: account,
+            kSecAttrAccount as String: account
         ]
-        let status = SecItemDelete(query as CFDictionary)
-        return status == errSecSuccess || status == errSecItemNotFound
+        SecItemDelete(query as CFDictionary)
     }
 }

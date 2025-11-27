@@ -1,4 +1,4 @@
-import SwiftUI
+internal import SwiftUI
 
 struct StatusMenuView: View {
     @ObservedObject var app = AppState.shared
@@ -26,7 +26,7 @@ struct StatusMenuView: View {
                         Text(folder.localPath)
                             .font(.system(size: 11))
 
-                        Text("Max: \(folder.maxSizeMB) MB → \(folder.driveFolderName ?? "No Drive Folder")")
+                        Text("\(folder.rules.count) rules → \(folder.driveFolderName ?? "No Drive Folder")")
                             .font(.system(size: 10))
                             .foregroundColor(.secondary)
                     }

@@ -1,4 +1,4 @@
-import SwiftUI
+internal import SwiftUI
 
 struct FolderRow: View {
     @ObservedObject var folder: WatchedFolder
@@ -22,9 +22,10 @@ struct FolderRow: View {
             HStack(spacing: 16) {
 
                 VStack(alignment: .leading) {
-                    Text("Max size (MB)")
-                    TextField("200", value: $folder.maxSizeMB, formatter: NumberFormatter())
-                        .frame(width: 80)
+                    Text("Rules")
+                    Button("Edit Rules") {
+                        showRulesEditor = true
+                    }
                 }
 
                 VStack(alignment: .leading) {
@@ -38,6 +39,7 @@ struct FolderRow: View {
         .padding(6)
         .sheet(isPresented: $showDrivePicker) {
             DrivePickerView(
+                selectedAccountID: $folder.accountID,
                 selected: Binding(
                     get: { folder.driveFolder },
                     set: { newValue in
@@ -55,5 +57,12 @@ struct FolderRow: View {
                 }
             )
         }
+        .sheet(isPresented: $showRulesEditor) {
+            RulesListView(rules: $folder.rules) {
+                AppState.shared.updateFolder(folder)
+                showRulesEditor = false
+            }
+        }
     }
+    @State private var showRulesEditor = false
 }

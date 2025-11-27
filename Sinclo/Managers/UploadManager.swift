@@ -60,27 +60,43 @@ final class UploadManager: ObservableObject {
             DispatchQueue.main.async {
                 rec.attempts += 1
                 rec.state = .uploading
-                rec.progress = 0.03
+                rec.progress = 0.0
             }
 
-            // Call existing GoogleDriveManager upload. It must call completion once finished.
-            GoogleDriveManager.shared.upload(fileURL: rec.localURL, parentFolderID: rec.parentDriveID) { res in
+            guard let accountID = AccountManager.shared.accounts.first?.id else {
                 DispatchQueue.main.async {
-                    switch res {
-                    case .success():
-                        rec.progress = 1.0
-                        rec.state = .completed
-                        rec.errorMessage = nil
-                        AppState.shared.log("Uploaded: \(rec.localURL.lastPathComponent)")
-                    case .failure(let err):
-                        rec.state = .failed
-                        rec.errorMessage = err.localizedDescription
-                        AppState.shared.log("Upload failed (\(rec.localURL.lastPathComponent)): \(err.localizedDescription)")
-                    }
-                    // if you want to auto-retry:
-                    // if rec.state == .failed && rec.attempts < 3 { self.retry(recordID: rec.id) }
+                    rec.state = .failed
+                    rec.errorMessage = "No account configured for upload."
+                    AppState.shared.log("Upload failed: No account configured.")
                 }
+                return
             }
+
+            GoogleDriveManager.shared.upload(
+                fileURL: rec.localURL,
+                accountID: accountID,
+                parentFolderID: rec.parentDriveID,
+                progress: { progress in
+                    DispatchQueue.main.async {
+                        rec.progress = progress
+                    }
+                },
+                completion: { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success:
+                            rec.progress = 1.0
+                            rec.state = .completed
+                            rec.errorMessage = nil
+                            AppState.shared.log("Uploaded: \(rec.localURL.lastPathComponent)")
+                        case .failure(let err):
+                            rec.state = .failed
+                            rec.errorMessage = err.localizedDescription
+                            AppState.shared.log("Upload failed (\(rec.localURL.lastPathComponent)): \(err.localizedDescription)")
+                        }
+                    }
+                }
+            )
         }
     }
 

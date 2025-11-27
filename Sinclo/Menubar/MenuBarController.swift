@@ -1,5 +1,5 @@
 import Cocoa
-import SwiftUI
+internal import SwiftUI
 
 final class MenuBarController: NSObject, NSApplicationDelegate {
 
@@ -7,6 +7,9 @@ final class MenuBarController: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     private var mainWindow: NSWindow?
     private var rightClickMenu: NSMenu!
+    private var showDockIconMenuItem: NSMenuItem!
+    
+    @State private var isDockIconVisible = true
 
     // Icons
     private var baseIcon = NSImage(named: "MenubarIcon")
@@ -25,6 +28,10 @@ final class MenuBarController: NSObject, NSApplicationDelegate {
         setupStatusItem()
         setupMenus()
         setupSyncListeners()
+        
+        // Set initial state
+        isDockIconVisible = NSApp.activationPolicy() == .regular
+        showDockIconMenuItem.state = isDockIconVisible ? .on : .off
     }
 
     // ----------------------------------------------------------
@@ -63,24 +70,33 @@ final class MenuBarController: NSObject, NSApplicationDelegate {
     // ----------------------------------------------------------
     private func showMainWindow() {
         if mainWindow == nil {
-            let content = MainWindowTabsView()   // <-- We will build this next
-                .frame(width: 620, height: 500)
+            let content = MainWindow()
+                .frame(minWidth: 700, minHeight: 500)
 
             mainWindow = NSWindow(
-                contentRect: NSRect(x: 0, y: 0, width: 620, height: 500),
-                styleMask: [.titled, .closable, .miniaturizable, .resizable],
+                contentRect: NSRect(x: 0, y: 0, width: 900, height: 600),
+                styleMask: [
+                    .titled,
+                    .closable,
+                    .miniaturizable,
+                    .resizable
+                ],
                 backing: .buffered,
                 defer: false
             )
 
+            mainWindow?.title = "Sinclo"
             mainWindow?.center()
             mainWindow?.isReleasedWhenClosed = false
-            mainWindow?.title = "Sinclo"
-            mainWindow?.contentView = NSHostingView(rootView: content)
+
+            let hostingView = NSHostingView(rootView: content)
+            hostingView.autoresizingMask = [.width, .height]
+            mainWindow?.contentView = hostingView
         }
 
         mainWindow?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
+        mainWindow?.collectionBehavior = .fullScreenPrimary
     }
 
     // ----------------------------------------------------------
@@ -95,7 +111,9 @@ final class MenuBarController: NSObject, NSApplicationDelegate {
 
         rightClickMenu.addItem(NSMenuItem.separator())
 
-        rightClickMenu.addItem(withTitle: "Show Dock Icon", action: #selector(toggleDockIcon), keyEquivalent: "")
+        showDockIconMenuItem = NSMenuItem(title: "Show Dock Icon", action: #selector(toggleDockIcon), keyEquivalent: "")
+        rightClickMenu.addItem(showDockIconMenuItem)
+        
         rightClickMenu.addItem(withTitle: "Quit Sinclo", action: #selector(quit), keyEquivalent: "q")
     }
 
@@ -104,12 +122,13 @@ final class MenuBarController: NSObject, NSApplicationDelegate {
     @objc private func openLogsTab()      { showMainWindow(); MainWindowTabsView.shared?.activateTab(.logs) }
 
     @objc private func toggleDockIcon() {
-        let current = NSApp.activationPolicy()
-        if current == .regular {
-            NSApp.setActivationPolicy(.accessory)
-        } else {
+        isDockIconVisible.toggle()
+        if isDockIconVisible {
             NSApp.setActivationPolicy(.regular)
+        } else {
+            NSApp.setActivationPolicy(.accessory)
         }
+        showDockIconMenuItem.state = isDockIconVisible ? .on : .off
     }
 
     @objc private func quit() { NSApp.terminate(nil) }
@@ -134,14 +153,18 @@ final class MenuBarController: NSObject, NSApplicationDelegate {
     }
 
     @objc private func startSync() {
-        isSyncing = true
-        glow = true
-        animateGlow()
+        DispatchQueue.main.async {
+            self.isSyncing = true
+            self.glow = true
+            self.animateGlow()
+        }
     }
 
     @objc private func stopSync() {
-        isSyncing = false
-        glow = false
+        DispatchQueue.main.async {
+            self.isSyncing = false
+            self.glow = false
+        }
     }
 
     // ----------------------------------------------------------

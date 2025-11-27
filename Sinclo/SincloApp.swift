@@ -1,4 +1,4 @@
-import SwiftUI
+internal import SwiftUI
 
 @main
 struct SincloApp: App {

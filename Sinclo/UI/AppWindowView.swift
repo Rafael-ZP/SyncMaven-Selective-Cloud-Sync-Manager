@@ -6,7 +6,7 @@
 //
 
 
-import SwiftUI
+internal import SwiftUI
 
 struct AppWindowView: View {
     @EnvironmentObject var app: AppState

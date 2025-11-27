@@ -1,52 +1,73 @@
-//
-//  AccountsTab.swift
-//
-
-import SwiftUI
+internal import SwiftUI
 
 struct AccountsTab: View {
-    @ObservedObject private var manager = AccountManager.shared
-
+    @StateObject var accountManager = AccountManager.shared
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-
-            HStack {
-                Text("Accounts")
-                    .font(.title2)
-                    .bold()
-
-                Spacer()
-
-                Button {
-                    manager.addAccount { _ in }
-                } label: {
-                    Label("Add Account", systemImage: "plus.circle")
-                }
-            }
-
-            Divider()
-
-            List {
-                ForEach(manager.accounts) { acc in
-                    HStack {
-                        Image(systemName: "person.crop.circle")
-                            .font(.system(size: 30))
-                        VStack(alignment: .leading) {
-                            Text(acc.email)
-                            Text("ID: \(acc.id)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 14) {
+                HStack {
+                    Text("Cloud Accounts")
+                        .font(.title2)
+                        .bold()
+                    Spacer()
+                    Button(action: {
+                        OAuth2PKCE.shared.startAuthorization { result in
+                            switch result {
+                            case .success(let tokens):
+                                AccountManager.shared.addAccount(
+                                    usingAccessToken: tokens.accessToken,
+                                    refreshToken: tokens.refreshToken
+                                )
+                            case .failure(let error):
+                                AppState.shared.log("Authentication failed: \(error.localizedDescription)")
+                            }
                         }
-                        Spacer()
-                        Button("Remove") {
-                            manager.remove(account: acc)
-                        }
+                    }) {
+                        Label("Add Google Account", systemImage: "plus.circle")
                     }
-                    .padding(.vertical, 4)
                 }
+                .padding(.bottom, 10)
+                
+                List {
+                    ForEach(accountManager.accounts) { account in
+                        HStack {
+                            if let data = account.avatarData, let image = NSImage(data: data) {
+                                Image(nsImage: image)
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                            } else {
+                                Image(systemName: "person.crop.circle.fill")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(.gray)
+                            }
+                            
+                            VStack(alignment: .leading) {
+                                Text(account.name ?? "Unknown Name")
+                                    .fontWeight(.medium)
+                                Text(account.email)
+                                    .foregroundColor(.secondary)
+                            }
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                accountManager.remove(account: account)
+                            }) {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .padding(.vertical, 8)
+                    }
+                }
+                .listStyle(InsetListStyle())
+                .frame(height: geometry.size.height * 0.8)
             }
-
-            Spacer()
+            .padding()
         }
     }
 }
