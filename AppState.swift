@@ -1,38 +1,36 @@
 // AppState.swift
 // Sinclo
-// Modified to persist and autosave watched folders & Manage Log Retention
+// Fixed: Removed Initialization Cycle
 
 import Foundation
 import Combine
 import AppKit
 internal import SwiftUI
 
-// 1. New Enum for Log Retention Options
+// Log Retention Options
 enum LogRetention: Int, CaseIterable, Identifiable, Codable {
     case oneHundred = 100
     case twoHundred = 200
     case fiveHundred = 500
     case oneThousand = 1000
     case twoThousand = 2000
-    case all = -1 // -1 represents "All"
+    case all = -1
     
     var id: Int { self.rawValue }
-    
-    var displayName: String {
-        return self == .all ? "All" : "\(self.rawValue)"
-    }
+    var displayName: String { self == .all ? "All" : "\(self.rawValue)" }
 }
 
 final class AppState: ObservableObject {
     static let shared = AppState()
     
     private init() {
-        // Load Log Preference
+        // 1. Load Log Preference
         if let savedLimit = UserDefaults.standard.value(forKey: logLimitKey) as? Int,
            let retention = LogRetention(rawValue: savedLimit) {
             self.logRetentionLimit = retention
         }
         
+        // 2. Load Data ONLY (Do not start SyncManager yet)
         loadFolders()
         repairFolderAccountIDs()
     }
@@ -42,16 +40,37 @@ final class AppState: ObservableObject {
     @Published var isMonitoring = false
     @Published var monitoringStartTime: Date?
     
-    // 2. Published property for Log Limit
     @Published var logRetentionLimit: LogRetention = .twoHundred {
         didSet {
             UserDefaults.standard.set(logRetentionLimit.rawValue, forKey: logLimitKey)
-            trimLogs() // Trim immediately if user lowers the limit
+            trimLogs()
         }
     }
 
     private let foldersKey = "Sinclo.WatchedFolders"
     private let logLimitKey = "Sinclo.LogRetentionLimit"
+
+    // MARK: - Startup Logic (Call this from MenuBarController)
+    func restoreMonitoring() {
+        // This is safe to call because 'init' is finished
+        var activeCount = 0
+        for folder in watchedFolders {
+            if folder.enabled {
+                // Verify access again before starting
+                if let url = URL(string: "file://\(folder.localPath)"),
+                   SecurityBookmark.startAccessing(url: url) {
+                    SyncManager.shared.startMonitoring(folder)
+                    activeCount += 1
+                }
+            }
+        }
+        
+        if activeCount > 0 {
+            isMonitoring = true
+            monitoringStartTime = Date()
+            log("Restored monitoring for \(activeCount) folders")
+        }
+    }
 
     // MARK: - Folder Management
     func pickLocalFolder() {
@@ -67,14 +86,11 @@ final class AppState: ObservableObject {
                 return
             }
 
-            let newFolder = WatchedFolder(
-                localPath: url.path,
-                bookmarkData: bookmark
-            )
-
+            let newFolder = WatchedFolder(localPath: url.path, bookmarkData: bookmark)
             watchedFolders.append(newFolder)
             saveFolders()
             
+            // If global monitoring is on, start this one immediately
             if isMonitoring {
                 if SecurityBookmark.startAccessing(url: url) {
                     SyncManager.shared.startMonitoring(newFolder)
@@ -97,7 +113,6 @@ final class AppState: ObservableObject {
             for folder in watchedFolders {
                 SyncManager.shared.stopMonitoring(folder: folder)
             }
-            // 3. Log when monitoring stops
             log("Monitoring stopped")
         }
     }
@@ -121,23 +136,22 @@ final class AppState: ObservableObject {
         }
     }
     
-    // MARK: - Safe Repair Function
+    // MARK: - Persistence & Repair
     func repairFolderAccountIDs() {
         let validIDs = AccountManager.shared.accounts.map { $0.id }
-
+        var changed = false
         for i in watchedFolders.indices {
             let currentID = watchedFolders[i].accountID ?? ""
-            
             if !validIDs.contains(currentID) {
-                NSLog("[Fix] folder '\(watchedFolders[i].localPath)' had invalid accountID '\(String(describing: watchedFolders[i].accountID))'. Resetting.")
+                // Don't log via AppState.log() here to avoid recursion risk during init
+                NSLog("[AppState] Fixing folder \(watchedFolders[i].localPath) accountID")
                 watchedFolders[i].accountID = validIDs.first ?? ""
+                changed = true
             }
         }
-
-        saveFolders()
+        if changed { saveFolders() }
     }
 
-    // MARK: - Persistence
     private func saveFolders() {
         do {
             let data = try JSONEncoder().encode(watchedFolders)
@@ -150,27 +164,17 @@ final class AppState: ObservableObject {
     private func loadFolders() {
         guard let data = UserDefaults.standard.data(forKey: foldersKey) else { return }
         do {
-            let decoded = try JSONDecoder().decode([WatchedFolder].self, from: data)
-            self.watchedFolders = decoded
+            self.watchedFolders = try JSONDecoder().decode([WatchedFolder].self, from: data)
             
+            // Just restore bookmark access, DO NOT start SyncManager here
             for folder in watchedFolders {
-                guard let bookmarkData = folder.bookmarkData else {
-                    log("No bookmark data for \(folder.localPath)")
-                    continue
-                }
-                
-                if let url = SecurityBookmark.restoreURL(from: bookmarkData) {
-                    if SecurityBookmark.startAccessing(url: url) {
-                        if folder.enabled {
-                            SyncManager.shared.startMonitoring(folder)
-                        }
-                    } else {
-                        log("Failed to restore access to \(url.path)")
-                    }
+                if let bookmarkData = folder.bookmarkData,
+                   let url = SecurityBookmark.restoreURL(from: bookmarkData) {
+                    _ = SecurityBookmark.startAccessing(url: url)
                 }
             }
         } catch {
-            log("Error loading folders: \(error.localizedDescription)")
+            print("Error loading folders: \(error)")
         }
     }
 
@@ -179,11 +183,7 @@ final class AppState: ObservableObject {
         DispatchQueue.main.async {
             let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
             let line = "[\(timestamp)] \(message)"
-            
-            // Insert new log
             self.logs.insert((UUID(), line), at: 0)
-
-            // 4. Respect the retention limit
             self.trimLogs()
         }
     }

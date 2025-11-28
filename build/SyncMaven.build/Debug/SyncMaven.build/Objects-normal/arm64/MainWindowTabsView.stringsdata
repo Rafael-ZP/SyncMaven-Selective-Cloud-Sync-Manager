@@ -1,0 +1,32 @@
+{
+  "source": "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/UI/MainWindowTabsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Watched Folders",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 19
+        }
+      },
+      {
+        "comment": "",
+        "key": "Accounts",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "Activity Log",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 27
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,56 @@
+{
+  "source": "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/UI/AccountsTab.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Remove Account?",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 93
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cloud Accounts",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 20
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Google Account",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 45
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 94
+        }
+      },
+      {
+        "comment": "",
+        "key": "Remove",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 97
+        }
+      },
+      {
+        "comment": "",
+        "key": "Are you sure you want to remove %@ from Sinclo? This cannot be undone.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 109
+        }
+      }
+    ]
+  },
+  "version": 1
+}

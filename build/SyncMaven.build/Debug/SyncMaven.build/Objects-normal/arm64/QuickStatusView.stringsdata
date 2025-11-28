@@ -1,0 +1,64 @@
+{
+  "source": "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/Menubar/QuickStatusView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Sinclo",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 14
+        }
+      },
+      {
+        "comment": "",
+        "key": "Open Settings",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "MONITORED FOLDERS",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 31
+        }
+      },
+      {
+        "comment": "",
+        "key": "No folders configured.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 39
+        }
+      },
+      {
+        "comment": "",
+        "key": "+ %lld more...",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 62
+        }
+      },
+      {
+        "comment": "",
+        "key": "RECENT ACTIVITY",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 75
+        }
+      },
+      {
+        "comment": "",
+        "key": "No recent activity.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 82
+        }
+      }
+    ]
+  },
+  "version": 1
+}

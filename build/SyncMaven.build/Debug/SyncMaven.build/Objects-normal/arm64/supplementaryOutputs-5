@@ -1,0 +1,23 @@
+{
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/Menubar/QuickStatusView.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/QuickStatusView.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/QuickStatusView.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/QuickStatusView.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/QuickStatusView.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/QuickStatusView.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/Menubar/StatusMenuView.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/StatusMenuView.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/StatusMenuView.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/StatusMenuView.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/StatusMenuView.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/StatusMenuView.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/Models/DriveFolder.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/DriveFolder.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/DriveFolder.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/DriveFolder.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/DriveFolder.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/DriveFolder.swiftdeps"
+  }
+}

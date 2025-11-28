@@ -1,0 +1,23 @@
+{
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/Models/WatchedFolder.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/WatchedFolder.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/WatchedFolder.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/WatchedFolder.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/WatchedFolder.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/WatchedFolder.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/UI/AccountsTab.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AccountsTab.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AccountsTab.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AccountsTab.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AccountsTab.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AccountsTab.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/UI/AppWindowView.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AppWindowView.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AppWindowView.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AppWindowView.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AppWindowView.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AppWindowView.swiftdeps"
+  }
+}

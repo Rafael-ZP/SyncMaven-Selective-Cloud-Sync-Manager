@@ -1,0 +1,24 @@
+{
+  "source": "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/SyncMaven.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Sinclo Settings...",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 16
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Watched Folder",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 24
+        }
+      }
+    ]
+  },
+  "version": 1
+}

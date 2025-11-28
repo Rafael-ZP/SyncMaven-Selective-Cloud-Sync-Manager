@@ -1,0 +1,48 @@
+{
+  "source": "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/Menubar/StatusMenuView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Watched Folders:",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 16
+        }
+      },
+      {
+        "comment": "",
+        "key": "No folders added.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 20
+        }
+      },
+      {
+        "comment": "",
+        "key": "Open Sinclo Settings",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 10
+        }
+      },
+      {
+        "comment": "",
+        "key": "Quit Sinclo",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 39
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld rules → %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 29
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FFBCB5E02ED4A29600C4B848 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = FFBCB5DF2ED4A29200C4B848 /* README.md */; };
+		FFC2936E2ED6FDA9009B46EB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2936D2ED6FDA9009B46EB /* AppState.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FF300A902ED9CB1C00227CAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFBCB5832ED49DB900C4B848 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FFBCB58A2ED49DB900C4B848;
+			remoteInfo = SyncMaven;
+		};
+		FF300A9F2ED9CB4700227CAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFBCB5832ED49DB900C4B848 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FFBCB58A2ED49DB900C4B848;
+			remoteInfo = SyncMaven;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FF300A8C2ED9CB1C00227CAF /* SyncMavenUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyncMavenUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF300A992ED9CB4700227CAF /* SyncMavenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyncMavenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF4D10FC2ED4A7A900EC4A1A /* SyncMaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyncMaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFBCB5DF2ED4A29200C4B848 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FFC2936D2ED6FDA9009B46EB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		FF300A8D2ED9CB1C00227CAF /* SyncMavenTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SyncMavenTests;
+			sourceTree = "<group>";
+		};
+		FF300A9A2ED9CB4700227CAF /* SyncMavenUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SyncMavenUITests;
+			sourceTree = "<group>";
+		};
+		FFBCB58D2ED49DB900C4B848 /* SyncMaven */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SyncMaven;
+			sourceTree = "<group>";
+		};
+		FFBCB5DB2ED4A26D00C4B848 /* scripts */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = scripts;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FF300A892ED9CB1C00227CAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF300A962ED9CB4700227CAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFBCB5882ED49DB900C4B848 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FFBCB5822ED49DB900C4B848 = {
+			isa = PBXGroup;
+			children = (
+				FFBCB58D2ED49DB900C4B848 /* SyncMaven */,
+				FFBCB5DB2ED4A26D00C4B848 /* scripts */,
+				FFBCB5DF2ED4A29200C4B848 /* README.md */,
+				FF4D10FC2ED4A7A900EC4A1A /* SyncMaven.app */,
+				FFC2936D2ED6FDA9009B46EB /* AppState.swift */,
+				FF300A8C2ED9CB1C00227CAF /* SyncMavenUnitTests.xctest */,
+				FF300A8D2ED9CB1C00227CAF /* SyncMavenTests */,
+				FF300A992ED9CB4700227CAF /* SyncMavenUITests.xctest */,
+				FF300A9A2ED9CB4700227CAF /* SyncMavenUITests */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF300A8B2ED9CB1C00227CAF /* SyncMavenUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF300A922ED9CB1C00227CAF /* Build configuration list for PBXNativeTarget "SyncMavenUnitTests" */;
+			buildPhases = (
+				FF300A882ED9CB1C00227CAF /* Sources */,
+				FF300A892ED9CB1C00227CAF /* Frameworks */,
+				FF300A8A2ED9CB1C00227CAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF300A912ED9CB1C00227CAF /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FF300A8D2ED9CB1C00227CAF /* SyncMavenTests */,
+			);
+			name = SyncMavenUnitTests;
+			packageProductDependencies = (
+			);
+			productName = SyncMavenTests;
+			productReference = FF300A8C2ED9CB1C00227CAF /* SyncMavenUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FF300A982ED9CB4700227CAF /* SyncMavenUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF300AA12ED9CB4700227CAF /* Build configuration list for PBXNativeTarget "SyncMavenUITests" */;
+			buildPhases = (
+				FF300A952ED9CB4700227CAF /* Sources */,
+				FF300A962ED9CB4700227CAF /* Frameworks */,
+				FF300A972ED9CB4700227CAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF300AA02ED9CB4700227CAF /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FF300A9A2ED9CB4700227CAF /* SyncMavenUITests */,
+			);
+			name = SyncMavenUITests;
+			packageProductDependencies = (
+			);
+			productName = SyncMavenUITests;
+			productReference = FF300A992ED9CB4700227CAF /* SyncMavenUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		FFBCB58A2ED49DB900C4B848 /* SyncMaven */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFBCB5AC2ED49DBA00C4B848 /* Build configuration list for PBXNativeTarget "SyncMaven" */;
+			buildPhases = (
+				FFBCB5872ED49DB900C4B848 /* Sources */,
+				FFBCB5882ED49DB900C4B848 /* Frameworks */,
+				FFBCB5892ED49DB900C4B848 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FFBCB58D2ED49DB900C4B848 /* SyncMaven */,
+				FFBCB5DB2ED4A26D00C4B848 /* scripts */,
+			);
+			name = SyncMaven;
+			packageProductDependencies = (
+			);
+			productName = Sinclo;
+			productReference = FF4D10FC2ED4A7A900EC4A1A /* SyncMaven.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FFBCB5832ED49DB900C4B848 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2610;
+				LastUpgradeCheck = 2610;
+				TargetAttributes = {
+					FF300A8B2ED9CB1C00227CAF = {
+						CreatedOnToolsVersion = 26.1.1;
+						TestTargetID = FFBCB58A2ED49DB900C4B848;
+					};
+					FF300A982ED9CB4700227CAF = {
+						CreatedOnToolsVersion = 26.1.1;
+						TestTargetID = FFBCB58A2ED49DB900C4B848;
+					};
+					FFBCB58A2ED49DB900C4B848 = {
+						CreatedOnToolsVersion = 26.1.1;
+					};
+				};
+			};
+			buildConfigurationList = FFBCB5862ED49DB900C4B848 /* Build configuration list for PBXProject "SyncMaven" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FFBCB5822ED49DB900C4B848;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FFBCB5822ED49DB900C4B848;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FFBCB58A2ED49DB900C4B848 /* SyncMaven */,
+				FF300A8B2ED9CB1C00227CAF /* SyncMavenUnitTests */,
+				FF300A982ED9CB4700227CAF /* SyncMavenUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FF300A8A2ED9CB1C00227CAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF300A972ED9CB4700227CAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFBCB5892ED49DB900C4B848 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF300A882ED9CB1C00227CAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF300A952ED9CB4700227CAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFBCB5872ED49DB900C4B848 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFBCB5E02ED4A29600C4B848 /* README.md in Sources */,
+				FFC2936E2ED6FDA9009B46EB /* AppState.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FF300A912ED9CB1C00227CAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FFBCB58A2ED49DB900C4B848 /* SyncMaven */;
+			targetProxy = FF300A902ED9CB1C00227CAF /* PBXContainerItemProxy */;
+		};
+		FF300AA02ED9CB4700227CAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FFBCB58A2ED49DB900C4B848 /* SyncMaven */;
+			targetProxy = FF300A9F2ED9CB4700227CAF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FF300A932ED9CB1C00227CAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L84VC34VHP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rafaelzieganpalg.SyncMavenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SyncMaven.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SyncMaven";
+			};
+			name = Debug;
+		};
+		FF300A942ED9CB1C00227CAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L84VC34VHP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rafaelzieganpalg.SyncMavenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SyncMaven.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SyncMaven";
+			};
+			name = Release;
+		};
+		FF300AA22ED9CB4700227CAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L84VC34VHP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rafaelzieganpalg.SyncMavenUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = SyncMaven;
+			};
+			name = Debug;
+		};
+		FF300AA32ED9CB4700227CAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L84VC34VHP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rafaelzieganpalg.SyncMavenUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = SyncMaven;
+			};
+			name = Release;
+		};
+		FFBCB5AA2ED49DBA00C4B848 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FFBCB5AB2ED49DBA00C4B848 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		FFBCB5AD2ED49DBA00C4B848 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L84VC34VHP;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelzieganpalg.syncmaven;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FFBCB5AE2ED49DBA00C4B848 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L84VC34VHP;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelzieganpalg.syncmaven;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FF300A922ED9CB1C00227CAF /* Build configuration list for PBXNativeTarget "SyncMavenUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF300A932ED9CB1C00227CAF /* Debug */,
+				FF300A942ED9CB1C00227CAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF300AA12ED9CB4700227CAF /* Build configuration list for PBXNativeTarget "SyncMavenUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF300AA22ED9CB4700227CAF /* Debug */,
+				FF300AA32ED9CB4700227CAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFBCB5862ED49DB900C4B848 /* Build configuration list for PBXProject "SyncMaven" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFBCB5AA2ED49DBA00C4B848 /* Debug */,
+				FFBCB5AB2ED49DBA00C4B848 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFBCB5AC2ED49DBA00C4B848 /* Build configuration list for PBXNativeTarget "SyncMaven" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFBCB5AD2ED49DBA00C4B848 /* Debug */,
+				FFBCB5AE2ED49DBA00C4B848 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FFBCB5832ED49DB900C4B848 /* Project object */;
+}

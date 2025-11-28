@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/UI/FolderRow.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rules",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Rules",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "Google Drive Folder",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 32
+        }
+      }
+    ]
+  },
+  "version": 1
+}

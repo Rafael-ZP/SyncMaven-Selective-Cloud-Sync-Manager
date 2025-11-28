@@ -1,0 +1,23 @@
+{
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/ContentView.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/ContentView.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/ContentView.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/SyncMaven.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/SyncMaven.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/SyncMaven.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/SyncMaven.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/SyncMaven.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/SyncMaven.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/UI/DrivePickerView.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/DrivePickerView.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/DrivePickerView.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/DrivePickerView.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/DrivePickerView.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/DrivePickerView.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/UI/FolderRow.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/FolderRow.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/FolderRow.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/FolderRow.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/FolderRow.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/FolderRow.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/UI/LogsTab.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/LogsTab.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/LogsTab.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/LogsTab.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/LogsTab.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/LogsTab.swiftdeps"
+  }
+}

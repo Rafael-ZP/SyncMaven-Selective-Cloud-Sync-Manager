@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/UI/RulesListView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Sync Rules",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 11
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 15
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld Active Rules",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 52
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Another Rule",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 49
+        }
+      }
+    ]
+  },
+  "version": 1
+}

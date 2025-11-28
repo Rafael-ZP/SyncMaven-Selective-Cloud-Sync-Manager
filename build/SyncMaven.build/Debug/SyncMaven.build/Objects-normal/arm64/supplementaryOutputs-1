@@ -1,0 +1,30 @@
+{
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/AppState.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AppState.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AppState.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AppState.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AppState.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/AppState.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/Core/FolderWatcher.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/FolderWatcher.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/FolderWatcher.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/FolderWatcher.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/FolderWatcher.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/FolderWatcher.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/Core/GoogleDriveManager.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/GoogleDriveManager.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/GoogleDriveManager.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/GoogleDriveManager.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/GoogleDriveManager.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/GoogleDriveManager.swiftdeps"
+  },
+  "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/SyncMaven/Core/ICloudManager.swift" : {
+    "const-values" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/ICloudManager.swiftconstvalues",
+    "dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/ICloudManager.d",
+    "diagnostics" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/ICloudManager.dia",
+    "object" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/ICloudManager.o",
+    "swift-dependencies" : "/Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/SyncMaven.build/Debug/SyncMaven.build/Objects-normal/arm64/ICloudManager.swiftdeps"
+  }
+}
