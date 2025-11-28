@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Logo_02_32x32 1.png",
+      "filename" : "ALPHA_White_16x16.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Logo_02_32x32.png",
+      "filename" : "ALPHA_White_32x32.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Logo_02_64x64.png",
+      "filename" : "ALPHA_White_64x64.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
