@@ -1,25 +1,57 @@
 // AppState.swift
 // Sinclo
-// Modified to persist and autosave watched folders
+// Modified to persist and autosave watched folders & Manage Log Retention
 
 import Foundation
 import Combine
 import AppKit
 internal import SwiftUI
 
+// 1. New Enum for Log Retention Options
+enum LogRetention: Int, CaseIterable, Identifiable, Codable {
+    case oneHundred = 100
+    case twoHundred = 200
+    case fiveHundred = 500
+    case oneThousand = 1000
+    case twoThousand = 2000
+    case all = -1 // -1 represents "All"
+    
+    var id: Int { self.rawValue }
+    
+    var displayName: String {
+        return self == .all ? "All" : "\(self.rawValue)"
+    }
+}
+
 final class AppState: ObservableObject {
     static let shared = AppState()
+    
     private init() {
+        // Load Log Preference
+        if let savedLimit = UserDefaults.standard.value(forKey: logLimitKey) as? Int,
+           let retention = LogRetention(rawValue: savedLimit) {
+            self.logRetentionLimit = retention
+        }
+        
         loadFolders()
-        // The SyncManager is now started after folders are loaded and accessed
+        repairFolderAccountIDs()
     }
 
     @Published var watchedFolders: [WatchedFolder] = []
-    @Published var logs: [String] = []
+    @Published var logs: [(id: UUID, text: String)] = []
     @Published var isMonitoring = false
     @Published var monitoringStartTime: Date?
+    
+    // 2. Published property for Log Limit
+    @Published var logRetentionLimit: LogRetention = .twoHundred {
+        didSet {
+            UserDefaults.standard.set(logRetentionLimit.rawValue, forKey: logLimitKey)
+            trimLogs() // Trim immediately if user lowers the limit
+        }
+    }
 
     private let foldersKey = "Sinclo.WatchedFolders"
+    private let logLimitKey = "Sinclo.LogRetentionLimit"
 
     // MARK: - Folder Management
     func pickLocalFolder() {
@@ -30,7 +62,6 @@ final class AppState: ObservableObject {
         panel.message = "Choose a folder to watch for new files."
 
         if panel.runModal() == .OK, let url = panel.url {
-            // Store bookmark data
             guard let bookmark = SecurityBookmark.createBookmark(for: url) else {
                 log("Failed to create security bookmark for \(url.path)")
                 return
@@ -60,11 +91,14 @@ final class AppState: ObservableObject {
         if isMonitoring {
             monitoringStartTime = Date()
             SyncManager.shared.startMonitoringAll()
+            log("Monitoring started")
         } else {
             monitoringStartTime = nil
             for folder in watchedFolders {
                 SyncManager.shared.stopMonitoring(folder: folder)
             }
+            // 3. Log when monitoring stops
+            log("Monitoring stopped")
         }
     }
 
@@ -86,6 +120,22 @@ final class AppState: ObservableObject {
             saveFolders()
         }
     }
+    
+    // MARK: - Safe Repair Function
+    func repairFolderAccountIDs() {
+        let validIDs = AccountManager.shared.accounts.map { $0.id }
+
+        for i in watchedFolders.indices {
+            let currentID = watchedFolders[i].accountID ?? ""
+            
+            if !validIDs.contains(currentID) {
+                NSLog("[Fix] folder '\(watchedFolders[i].localPath)' had invalid accountID '\(String(describing: watchedFolders[i].accountID))'. Resetting.")
+                watchedFolders[i].accountID = validIDs.first ?? ""
+            }
+        }
+
+        saveFolders()
+    }
 
     // MARK: - Persistence
     private func saveFolders() {
@@ -98,13 +148,11 @@ final class AppState: ObservableObject {
     }
 
     private func loadFolders() {
-        
         guard let data = UserDefaults.standard.data(forKey: foldersKey) else { return }
         do {
             let decoded = try JSONDecoder().decode([WatchedFolder].self, from: data)
             self.watchedFolders = decoded
             
-            // Restore access using bookmarks
             for folder in watchedFolders {
                 guard let bookmarkData = folder.bookmarkData else {
                     log("No bookmark data for \(folder.localPath)")
@@ -130,11 +178,21 @@ final class AppState: ObservableObject {
     func log(_ message: String) {
         DispatchQueue.main.async {
             let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
-            self.logs.insert("[\(timestamp)] \(message)", at: 0)
-            if self.logs.count > 200 {
-                self.logs.removeLast()
-            }
+            let line = "[\(timestamp)] \(message)"
+            
+            // Insert new log
+            self.logs.insert((UUID(), line), at: 0)
+
+            // 4. Respect the retention limit
+            self.trimLogs()
         }
     }
     
+    private func trimLogs() {
+        if logRetentionLimit != .all {
+            if logs.count > logRetentionLimit.rawValue {
+                logs = Array(logs.prefix(logRetentionLimit.rawValue))
+            }
+        }
+    }
 }

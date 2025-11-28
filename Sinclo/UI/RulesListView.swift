@@ -5,31 +5,56 @@ struct RulesListView: View {
     var onSave: () -> Void
     
     var body: some View {
-        VStack {
-            Text("Edit Rules")
-                .font(.title)
-                .padding()
-            
-            List {
-                ForEach($rules) { $rule in
-                    RuleEditorView(rule: $rule)
-                }
-                .onDelete { indices in
-                    rules.remove(atOffsets: indices)
-                }
-            }
-            
+        VStack(spacing: 0) {
+            // Header
             HStack {
-                Button("Add Rule") {
-                    rules.append(Rule())
-                }
+                Text("Sync Rules")
+                    .font(.title2)
+                    .bold()
                 Spacer()
                 Button("Done") {
+                    // Safety Check: Ensure at least one rule exists
+                    if rules.isEmpty { rules.append(Rule()) }
                     onSave()
                 }
+                .keyboardShortcut(.defaultAction)
             }
             .padding()
+            .background(Color(nsColor: .windowBackgroundColor))
+            
+            Divider()
+            
+            // List
+            List {
+                ForEach($rules.indices, id: \.self) { index in
+                    RuleEditorView(
+                        rule: $rules[index],
+                        canRemove: rules.count > 1, // Compulsory 1 rule
+                        onRemove: {
+                            rules.remove(at: index)
+                        }
+                    )
+                    .padding(.vertical, 8)
+                }
+            }
+            .frame(minWidth: 500, minHeight: 400)
+            
+            Divider()
+            
+            // Footer
+            HStack {
+                Button(action: {
+                    withAnimation { rules.append(Rule()) }
+                }) {
+                    Label("Add Another Rule", systemImage: "plus")
+                }
+                Spacer()
+                Text("\(rules.count) Active Rules")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+            .background(Color(nsColor: .windowBackgroundColor))
         }
-        .frame(minWidth: 400, minHeight: 300)
     }
 }

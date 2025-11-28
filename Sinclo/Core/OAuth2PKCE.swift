@@ -38,7 +38,9 @@ final class OAuth2PKCE {
         "openid",
         "email",
         "profile",
-        "https://www.googleapis.com/auth/drive"
+        "https://www.googleapis.com/auth/drive",
+        "https://www.googleapis.com/auth/drive.metadata.readonly",
+        "https://www.googleapis.com/auth/drive.readonly"
     ].joined(separator: " ")
 
     private var codeVerifier: String?

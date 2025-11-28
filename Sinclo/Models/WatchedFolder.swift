@@ -19,7 +19,7 @@ class WatchedFolder: ObservableObject, Identifiable, Codable {
     var bookmarkData: Data?
     @Published var rules: [Rule] = [Rule()]
     @Published var accountID: String?
-    @Published var syncedFiles: [String: String] = [:]
+    @Published var syncedFiles: [String: String] = [:] // Key: full relative path, Value: fileID
 
     // MARK: Normal Init
     init(localPath: String, bookmarkData: Data?) {

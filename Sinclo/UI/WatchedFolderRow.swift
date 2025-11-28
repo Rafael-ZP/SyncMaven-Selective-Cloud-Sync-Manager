@@ -1,98 +1,99 @@
+// WatchedFolderRow.swift
+// Sinclo
+// Modern Row Design
+
 internal import SwiftUI
 
 struct WatchedFolderRow: View {
     @ObservedObject var folder: WatchedFolder
     @State private var showDrivePicker = false
+    @State private var showRulesEditor = false
+    @State private var isHovering = false
     @StateObject private var uploadManager = UploadManager.shared
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack(spacing: 15) {
-                Image(systemName: "folder.fill")
-                    .font(.title)
-                    .foregroundColor(.accentColor)
-
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(folder.localPath.removingPercentEncoding ?? folder.localPath)
-                        .fontWeight(.medium)
-                        .lineLimit(1)
+        VStack(alignment: .leading, spacing: 0) {
+            
+            // --- Top Row: Info & Controls ---
+            HStack(spacing: 16) {
+                // Icon
+                ZStack {
+                    Circle()
+                        .fill(folder.enabled ? Color.accentColor.opacity(0.1) : Color.gray.opacity(0.1))
+                        .frame(width: 44, height: 44)
                     
-                    HStack {
-                        Image(systemName: "g.circle.fill")
-                            .foregroundColor(.gray)
-                        Text(folder.driveFolderName ?? "No Drive folder selected")
-                            .foregroundColor(.secondary)
-                            .lineLimit(1)
-                    }
-                    .font(.caption)
+                    Image(systemName: "folder.fill")
+                        .font(.title3)
+                        .foregroundColor(folder.enabled ? .accentColor : .gray)
                 }
-
+                
+                // Path Info
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(folder.localPath.removingPercentEncoding ?? folder.localPath)
+                        .font(.headline)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                    
+                    HStack(spacing: 4) {
+                        Image(systemName: "cloud.fill")
+                            .font(.caption2)
+                        Text(folder.driveFolderName ?? "Select Drive Folder...")
+                            .font(.subheadline)
+                    }
+                    .foregroundColor(folder.driveFolderName == nil ? .red : .secondary)
+                }
+                
                 Spacer()
-
-                HStack(spacing: 20) {
-                    Button("Rules") {
-                        showRulesEditor = true
+                
+                // Action Buttons (Visible on Hover or Always if you prefer)
+                HStack(spacing: 12) {
+                    Button(action: { showRulesEditor = true }) {
+                        Label("\(folder.rules.count) Rules", systemImage: "slider.horizontal.3")
                     }
-
-                    Button(action: { showDrivePicker = true }) {
-                        Image(systemName: "icloud.and.arrow.up")
-                        Text("Change")}
-                            .onAppear {
-                                // Auto-fix invalid accountID
-                                if !AccountManager.shared.accounts.contains(where: { $0.id == folder.accountID }) {
-                                    folder.accountID = AccountManager.shared.accounts.first?.id ?? ""
-                                    AppState.shared.updateFolder(folder)
-                                }
-                            }
-
-                    Toggle(isOn: $folder.enabled) {
-                        Text("")
+                    .buttonStyle(BorderedButtonStyle())
+                    
+                    Button(action: {
+                        ensureAccountSelected()
+                        showDrivePicker = true
+                    }) {
+                        Label("Target", systemImage: "arrow.triangle.branch")
                     }
-                    .toggleStyle(SwitchToggleStyle())
-                    .onChange(of: folder.enabled) { _ in
-                        AppState.shared.updateFolder(folder)
-                    }
+                    .buttonStyle(BorderedButtonStyle())
+                    
+                    Toggle("", isOn: $folder.enabled)
+                        .toggleStyle(SwitchToggleStyle(tint: .accentColor))
                 }
             }
+            .padding(16)
             
+            // --- Upload Progress Section ---
             let uploads = uploadManager.uploadsForFolder(path: folder.localPath)
             if !uploads.isEmpty {
-                Divider().padding(.top, 8)
-                VStack(alignment: .leading, spacing: 4) {
+                Divider()
+                VStack(spacing: 0) {
                     ForEach(uploads) { upload in
-                        HStack {
-                            Text(upload.localURL.lastPathComponent)
-                                .font(.caption)
-                            
-                            Spacer()
-                            
-                            switch upload.state {
-                            case .pending:
-                                Text("Queued")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            case .uploading:
-                                ProgressView(value: upload.progress)
-                                    .frame(width: 100)
-                                    .drawingGroup()
-                            case .completed:
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
-                            case .failed:
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.red)
-                                Button("Retry") {
-                                    uploadManager.retry(recordID: upload.id)
-                                }
-                                .font(.caption)
-                            }
-                        }
+                        UploadProgressRow(upload: upload)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
                     }
                 }
-                .padding(.top, 8)
+                .background(Color(nsColor: .controlBackgroundColor))
             }
         }
-        .padding(.vertical, 8)
+        .background(Color(nsColor: .controlBackgroundColor))
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.gray.opacity(0.15), lineWidth: 1)
+        )
+        .shadow(color: Color.black.opacity(0.03), radius: 4, x: 0, y: 2)
+        .contextMenu {
+            Button("Remove Folder", role: .destructive) {
+                if let idx = AppState.shared.watchedFolders.firstIndex(where: { $0.id == folder.id }) {
+                    AppState.shared.removeFolders(at: IndexSet(integer: idx))
+                }
+            }
+        }
         .sheet(isPresented: $showDrivePicker) {
             DrivePickerView(
                 selectedAccountID: $folder.accountID,
@@ -107,9 +108,7 @@ struct WatchedFolderRow: View {
                     AppState.shared.updateFolder(folder)
                     showDrivePicker = false
                 },
-                onCancel: {
-                    showDrivePicker = false
-                }
+                onCancel: { showDrivePicker = false }
             )
         }
         .sheet(isPresented: $showRulesEditor) {
@@ -119,5 +118,37 @@ struct WatchedFolderRow: View {
             }
         }
     }
-    @State private var showRulesEditor = false
+    
+    private func ensureAccountSelected() {
+        if folder.accountID == nil || folder.accountID!.isEmpty {
+             folder.accountID = AccountManager.shared.accounts.first?.id
+             AppState.shared.updateFolder(folder)
+        }
+    }
+}
+
+// Helper Subview for Progress
+struct UploadProgressRow: View {
+    @ObservedObject var upload: UploadRecord
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "doc.fill")
+                .foregroundColor(.secondary)
+            Text(upload.localURL.lastPathComponent)
+                .font(.caption)
+                .lineLimit(1)
+            Spacer()
+            
+            if upload.state == .uploading {
+                ProgressView(value: upload.progress)
+                    .progressViewStyle(LinearProgressViewStyle())
+                    .frame(width: 80)
+            } else if upload.state == .completed {
+                Image(systemName: "checkmark").foregroundColor(.green).font(.caption)
+            } else if upload.state == .failed {
+                Image(systemName: "exclamationmark.triangle").foregroundColor(.red).font(.caption)
+            }
+        }
+    }
 }

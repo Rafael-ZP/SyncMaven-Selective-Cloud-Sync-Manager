@@ -69,14 +69,35 @@ final class AccountManager: ObservableObject {
     }
     private let legacyImportFlag = "Sinclo.LegacyImportCompleted"
     func remove(account: SincloAccount) {
-        NSLog("[AccountManager] Removing account \(account.email)")
+        NSLog("[AccountManager] Removing account \(account.email) id=\(account.id)")
 
-        // remove tokens
-        KeychainHelper.shared.delete(service: "Sinclo", account: "Account.\(account.id)")
+        // delete tokens
+        KeychainHelper.shared.delete(service: keychainService, account: "Account.\(account.id)")
 
-        // remove from metadata
+        // remove from metadata array
         accounts.removeAll { $0.id == account.id }
         saveMetadata()
+
+        // Update watched folders that pointed to this removed account
+        DispatchQueue.global(qos: .utility).async {
+            var folders = Persistence.shared.loadWatchedFolders()
+            var modified = false
+            for i in folders.indices {
+                if folders[i].accountID == account.id {
+                    let replacement = AccountManager.shared.accounts.first?.id ?? ""
+                    NSLog("[AccountManager] Reassigning folder '\(folders[i].localPath)' accountID -> '\(replacement)'")
+                    folders[i].accountID = replacement
+                    modified = true
+                }
+            }
+            if modified {
+                Persistence.shared.saveWatchedFolders(folders)
+                DispatchQueue.main.async {
+                    // notify AppState to reload
+                    AppState.shared.watchedFolders = folders
+                }
+            }
+        }
 
         DispatchQueue.main.async {
             self.objectWillChange.send()
@@ -86,69 +107,28 @@ final class AccountManager: ObservableObject {
   
     /// This is robust: it detects multiple stored formats (["accessToken":...], OAuth2PKCE.Tokens, legacy keys).
     func tokens(for accountID: String) -> (accessToken: String, refreshToken: String?)? {
-        print("\n====== TOKEN LOOKUP DEBUG for \(accountID) ======")
-
-        guard let d = KeychainHelper.shared.load(service: keychainService,
-                                                 account: "Account.\(accountID)") else {
-            print("Keychain.load returned NIL — no item stored.")
-            print("=================================================\n")
+        NSLog("[AccountManager] tokens(for:) lookup for id=\(accountID)")
+        guard let d = KeychainHelper.shared.load(service: keychainService, account: "Account.\(accountID)") else {
+            NSLog("[AccountManager] Keychain.load returned NIL for Account.\(accountID)")
             return nil
         }
 
-        print("Loaded raw data: \(d.count) bytes")
-
-        // 1) dictionary type
-        if let dict = try? JSONDecoder().decode([String:String?].self, from: d) {
-            print("Decoded as [String:String?]: \(dict)")
-
-            if let accessMaybe = dict["accessToken"] ?? dict["access_token"],
-               let access = accessMaybe, !access.isEmpty {
-
-                print("→ FOUND accessToken in simple dict")
-                let refresh = dict["refreshToken"] ?? dict["refresh_token"] ?? nil
-                print("→ FINAL TOKENS: access=\(access.prefix(15))..., refresh=\(refresh ?? "<nil>")")
-                print("=================================================\n")
-                return (access, refresh)
-            } else {
-                print("Simple dict decode OK but accessToken missing or empty.")
+        // Try multiple decoding strategies & log
+        if let dict = try? JSONDecoder().decode([String: String?].self, from: d) {
+            NSLog("[AccountManager] Decoded keychain dict: \(dict)")
+            if let access = dict["accessToken"] ?? dict["access_token"], let a = access {
+                let refresh = dict["refreshToken"] ?? dict["refresh_token"]
+                return (a, refresh ?? nil)
             }
-        } else {
-            print("Decode as [String:String?] FAILED")
         }
 
-        // 2) full struct
+        // fallback try decode to OAuth2PKCE.Tokens (older shape)
         if let tok = try? JSONDecoder().decode(OAuth2PKCE.Tokens.self, from: d) {
-            print("Decoded as OAuth2PKCE.Tokens → access=\(tok.accessToken.prefix(15))...")
-
-            if !tok.accessToken.isEmpty {
-                print("→ FINAL TOKENS (struct): access=\(tok.accessToken.prefix(15))..., refresh=\(tok.refreshToken ?? "<nil>")")
-                print("=================================================\n")
-                return (tok.accessToken, tok.refreshToken)
-            } else {
-                print("Token struct decode OK but accessToken empty.")
-            }
-        } else {
-            print("Decode as OAuth2PKCE.Tokens FAILED")
+            NSLog("[AccountManager] Decoded OAuth2PKCE.Tokens from keychain")
+            return (tok.accessToken, tok.refreshToken)
         }
 
-        // 3) legacy JSON
-        if let json = try? JSONSerialization.jsonObject(with: d) as? [String: Any] {
-            print("Decoded via JSONSerialization: \(json)")
-
-            if let access = (json["access_token"] as? String) ?? (json["accessToken"] as? String),
-               !access.isEmpty {
-                let refresh = (json["refresh_token"] as? String) ?? (json["refreshToken"] as? String)
-                print("→ FINAL TOKENS (legacy JSON): access=\(access.prefix(15))..., refresh=\(refresh ?? "<nil>")")
-                print("=================================================\n")
-                return (access, refresh)
-            } else {
-                print("Legacy JSON decode OK but access_token not found.")
-            }
-        } else {
-            print("JSONSerialization decode FAILED")
-        }
-
-        print("→ FINAL RESULT: NO TOKENS FOUND\n=================================================\n")
+        NSLog("[AccountManager] Unable to decode tokens for Account.\(accountID)")
         return nil
     }
     

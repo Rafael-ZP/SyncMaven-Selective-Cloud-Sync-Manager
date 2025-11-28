@@ -5,21 +5,26 @@
 //  Created by Rafael Zieganpalg on 26/11/25.
 //
 
-
+import Foundation
 internal import SwiftUI
 
 struct DrivePickerView: View {
     @StateObject private var accountManager = AccountManager.shared
+    
     @Binding var selectedAccountID: String?
     
+    // UI State
     @State private var folders: [DriveFolder] = []
     @State private var isLoading = false
     @State private var error: String?
-
+    
+    // Selection Binding
     @Binding var selected: DriveFolder?
+    
+    // Actions
     var onSave: () -> Void
     var onCancel: () -> Void
-
+    
     var body: some View {
         VStack(spacing: 20) {
             if selectedAccountID == nil {
@@ -36,19 +41,22 @@ struct DrivePickerView: View {
             }
         }
     }
-
-    @ViewBuilder
-    private var accountSelectionView: some View {
+    
+    // MARK: - Account Selection
+    @ViewBuilder private var accountSelectionView: some View {
         VStack {
             Text("Choose a Google Account")
                 .font(.title2)
+                .bold()
+            
             List(accountManager.accounts) { account in
-                Button(action: {
+                Button {
                     self.selectedAccountID = account.id
                     loadFolders(for: account.id)
-                }) {
-                    HStack {
-                        if let data = account.avatarData, let image = NSImage(data: data) {
+                } label: {
+                    HStack(spacing: 10) {
+                        if let data = account.avatarData,
+                           let image = NSImage(data: data) {
                             Image(nsImage: image)
                                 .resizable()
                                 .frame(width: 30, height: 30)
@@ -57,75 +65,98 @@ struct DrivePickerView: View {
                             Image(systemName: "person.crop.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30)
+                                .foregroundColor(.gray)
                         }
+                        
                         Text(account.email)
+                            .font(.body)
                     }
+                    .padding(.vertical, 4)
                 }
-                .buttonStyle(PlainButtonStyle())
+                .buttonStyle(.plain)
             }
-            .listStyle(InsetListStyle())
+            .listStyle(.inset)
             
             Button("Cancel", action: onCancel)
         }
     }
-
-    @ViewBuilder
-    private var folderSelectionView: some View {
+    
+    // MARK: - Folder Selection
+    @ViewBuilder private var folderSelectionView: some View {
         VStack {
             Text("Choose a Google Drive Folder")
                 .font(.title2)
-
+                .bold()
+            
             if isLoading {
-                ProgressView()
+                Spacer()
+                ProgressView("Fetching folders...")
+                Spacer()
             } else if let error = error {
+                Spacer()
                 Text("Error: \(error)")
                     .foregroundColor(.red)
+                    .multilineTextAlignment(.center)
+                Button("Retry") {
+                    if let id = selectedAccountID { loadFolders(for: id) }
+                }
+                Spacer()
             } else {
                 List(folders, id: \.id) { folder in
-                    Button(action: {
+                    Button {
                         self.selected = folder
-                    }) {
+                    } label: {
                         HStack {
-                            Image(systemName: self.selected?.id == folder.id ? "checkmark.circle.fill" : "circle")
+                            Image(systemName: selected?.id == folder.id ? "checkmark.circle.fill" : "folder")
+                                .foregroundColor(selected?.id == folder.id ? .blue : .gray)
                             Text(folder.name)
                         }
+                        .contentShape(Rectangle())
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(.plain)
                 }
-                .listStyle(InsetListStyle())
+                .listStyle(.inset)
             }
-
+            
             HStack {
                 Button("Back") {
-                    self.selectedAccountID = nil
-                    self.folders = []
-                    self.error = nil
+                    withAnimation {
+                        selectedAccountID = nil
+                        folders = []
+                        error = nil
+                        selected = nil
+                    }
                 }
+                
                 Spacer()
                 Button("Cancel", action: onCancel)
                 Spacer()
+                
                 Button("Save", action: onSave)
                     .disabled(selected == nil)
+                    .keyboardShortcut(.defaultAction)
             }
         }
     }
-
+    
+    // MARK: - Logic
+    
     private func loadFolders(for accountID: String) {
-        self.isLoading = true
-        self.error = nil
+        isLoading = true
+        error = nil
+        folders = []
         
-        GoogleDriveManager.shared.listFolders(accountID: accountID) { result in
-            let workItem = DispatchWorkItem {
+        // Explicitly typed closure to help compiler
+        GoogleDriveManager.shared.listAllFolders(accountID: accountID) { (result: Result<[DriveFolder], Error>) in
+            DispatchQueue.main.async {
                 self.isLoading = false
                 switch result {
-                case .success(let folderList):
-                    self.folders = folderList.map { DriveFolder(id: $0.id, name: $0.name) }
-                case .failure(let error):
-                    self.error = error.localizedDescription
+                case .success(let items):
+                    self.folders = items.sorted { $0.name < $1.name }
+                case .failure(let err):
+                    self.error = err.localizedDescription
                 }
             }
-            DispatchQueue.main.async(execute: workItem)
         }
     }
 }
-
