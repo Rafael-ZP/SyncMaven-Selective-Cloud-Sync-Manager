@@ -3,7 +3,7 @@ import Foundation
 
 final class Persistence {
     static let shared = Persistence()
-    private let k = "Sinclo.WatchedFolders"
+    private let k = "SyncMaven.WatchedFolders"
 
     func saveWatchedFolders(_ arr: [WatchedFolder]) {
         if let d = try? JSONEncoder().encode(arr) {

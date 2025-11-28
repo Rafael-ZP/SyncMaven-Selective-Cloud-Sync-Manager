@@ -7,7 +7,7 @@ struct StatusMenuView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
 
-            Button("Open Sinclo Settings") {
+            Button("Open SyncMaven Settings") {
                 openMainWindow()
             }
 
@@ -36,7 +36,7 @@ struct StatusMenuView: View {
 
             Divider()
 
-            Button("Quit Sinclo") {
+            Button("Quit SyncMaven") {
                 NSApplication.shared.terminate(nil)
             }
         }
@@ -46,7 +46,7 @@ struct StatusMenuView: View {
     }
 
     private func openMainWindow() {
-        if let window = NSApp.windows.first(where: { $0.title == "Sinclo Settings" }) {
+        if let window = NSApp.windows.first(where: { $0.title == "SyncMaven Settings" }) {
             window.makeKeyAndOrderFront(nil)
             return
         }
@@ -56,7 +56,7 @@ struct StatusMenuView: View {
             contentViewController: hosting
         )
 
-        window.title = "Sinclo Settings"
+        window.title = "SyncMaven Settings"
         window.makeKeyAndOrderFront(nil)
     }
 }

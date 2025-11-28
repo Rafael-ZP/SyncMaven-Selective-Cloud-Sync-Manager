@@ -4,9 +4,9 @@ import Combine
 final class SyncManager: ObservableObject {
     static let shared = SyncManager()
 
-    private let syncQueue = DispatchQueue(label: "com.sinclo.syncQueue", qos: .utility)
+    private let syncQueue = DispatchQueue(label: "com.SyncMaven.syncQueue", qos: .utility)
     private let fileOperationSemaphore = DispatchSemaphore(value: 4)
-    private let fileOperationQueue = DispatchQueue(label: "com.sinclo.fileOps", attributes: .concurrent)
+    private let fileOperationQueue = DispatchQueue(label: "com.SyncMaven.fileOps", attributes: .concurrent)
     
     private var monitors: [UUID: FolderMonitor] = [:]
     private var debounceTimers: [UUID: Timer] = [:]
@@ -74,10 +74,10 @@ final class SyncManager: ObservableObject {
         guard let accountID = folder.accountID, let rootRemoteID = folder.driveFolder?.id else { completion(); return }
         let localRoot = URL(fileURLWithPath: folder.localPath)
         
-        DispatchQueue.main.async { NotificationCenter.default.post(name: Notification.Name("Sinclo.SyncStarted"), object: nil) }
+        DispatchQueue.main.async { NotificationCenter.default.post(name: Notification.Name("SyncMaven.SyncStarted"), object: nil) }
         
         reconcileFolder(localURL: localRoot, remoteID: rootRemoteID, accountID: accountID, ruleRootFolder: folder) {
-            DispatchQueue.main.async { NotificationCenter.default.post(name: Notification.Name("Sinclo.SyncFinished"), object: nil) }
+            DispatchQueue.main.async { NotificationCenter.default.post(name: Notification.Name("SyncMaven.SyncFinished"), object: nil) }
             completion()
         }
     }

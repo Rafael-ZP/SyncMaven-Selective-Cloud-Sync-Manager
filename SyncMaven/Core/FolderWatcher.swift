@@ -6,7 +6,7 @@ final class FolderWatcher {
     private var source: DispatchSourceFileSystemObject?
     private let debounceInterval: TimeInterval = 0.6
     private var lastEvent: Date = Date.distantPast
-    private let queue = DispatchQueue(label: "com.sinclo.folderwatcher", qos: .utility)
+    private let queue = DispatchQueue(label: "com.SyncMaven.folderwatcher", qos: .utility)
     var onChange: (() -> Void)?
 
     init(folderURL: URL) {

@@ -1,5 +1,5 @@
 // AppState.swift
-// Sinclo
+// SyncMaven
 // Fixed: Removed Initialization Cycle
 
 import Foundation
@@ -47,8 +47,8 @@ final class AppState: ObservableObject {
         }
     }
 
-    private let foldersKey = "Sinclo.WatchedFolders"
-    private let logLimitKey = "Sinclo.LogRetentionLimit"
+    private let foldersKey = "SyncMaven.WatchedFolders"
+    private let logLimitKey = "SyncMaven.LogRetentionLimit"
 
     // MARK: - Startup Logic (Call this from MenuBarController)
     func restoreMonitoring() {

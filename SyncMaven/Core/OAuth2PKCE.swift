@@ -49,11 +49,11 @@ final class OAuth2PKCE {
     private var redirectPort: UInt16 = 0
 
     // legacy key (single-account storage used by older versions)
-    private let legacyTokenKey = "Sinclo.GoogleDrive.Tokens"
+    private let legacyTokenKey = "SyncMaven.GoogleDrive.Tokens"
 
     // per-account token key prefix in UserDefaults (keeps legacy for compatibility)
     private func tokenKey(for accountID: String) -> String {
-        return "Sinclo.GoogleDrive.Tokens.\(accountID)"
+        return "SyncMaven.GoogleDrive.Tokens.\(accountID)"
     }
 
     // -----------------------------
@@ -309,13 +309,13 @@ final class OAuth2PKCE {
                 }
 
                 if handled.testAndSet() {
-                    let html = "<html><body><h3>Sinclo: Login already handled. You can close this tab.</h3></body></html>"
+                    let html = "<html><body><h3>SyncMaven: Login already handled. You can close this tab.</h3></body></html>"
                     let resp = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: \(html.count)\r\n\r\n\(html)"
                     conn.send(content: resp.data(using: .utf8), completion: .contentProcessed({ _ in conn.cancel() }))
                     return
                 }
 
-                let html = "<html><body><h3>Sinclo: Login Complete. You can close this tab.</h3></body></html>"
+                let html = "<html><body><h3>SyncMaven: Login Complete. You can close this tab.</h3></body></html>"
                 let resp =
                 """
                 HTTP/1.1 200 OK\r

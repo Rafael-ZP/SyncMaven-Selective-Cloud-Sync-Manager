@@ -1,5 +1,5 @@
 // AccountsTab.swift
-// Sinclo
+// SyncMaven
 // Fixed: Removed GeometryReader to prevent AttributeGraph cycles.
 
 internal import SwiftUI
@@ -9,7 +9,7 @@ struct AccountsTab: View {
     @StateObject var accountManager = AccountManager.shared
     
     // State for Deletion Alert
-    @State private var accountToDelete: SincloAccount?
+    @State private var accountToDelete: SyncMavenAccount?
     @State private var showDeleteConfirmation = false
     
     var body: some View {
@@ -106,7 +106,7 @@ struct AccountsTab: View {
                 }
             }
         } message: {
-            Text("Are you sure you want to remove \(accountToDelete?.email ?? "this account") from Sinclo? This cannot be undone.")
+            Text("Are you sure you want to remove \(accountToDelete?.email ?? "this account") from SyncMaven? This cannot be undone.")
         }
     }
     

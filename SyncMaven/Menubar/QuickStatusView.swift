@@ -1,5 +1,5 @@
 // QuickStatusView.swift
-// Sinclo
+// SyncMaven
 // Modern Popover for Menu Bar
 
 internal import SwiftUI
@@ -11,7 +11,7 @@ struct QuickStatusView: View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Text("Sinclo")
+                Text("SyncMaven")
                     .font(.headline)
                 Spacer()
                 Button("Open Settings") {

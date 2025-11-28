@@ -6,11 +6,11 @@
 	<dict>
 		<key>com.apple.developer.icloud-container-identifiers</key>
 		<array>
-			<string>iCloud.com.rafael.sinclo</string>
+			<string>iCloud.com.rafael.SyncMaven</string>
 		</array>
 		<key>com.apple.developer.ubiquity-container-identifiers</key>
 		<array>
-			<string>iCloud.com.rafael.sinclo</string>
+			<string>iCloud.com.rafael.SyncMaven</string>
 		</array>
 		<key>com.apple.security.app-sandbox</key>
 		<false/>

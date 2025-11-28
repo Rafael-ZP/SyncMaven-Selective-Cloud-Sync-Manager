@@ -1,5 +1,5 @@
 // LogsTab.swift
-// Sinclo
+// SyncMaven
 // Fixed: Removed GeometryReader to prevent AttributeGraph cycles.
 
 internal import SwiftUI
@@ -58,7 +58,7 @@ struct LogsTab: View {
     
     func saveLogsToFile() {
         let panel = NSSavePanel()
-        panel.nameFieldStringValue = "Sinclo_Logs.txt"
+        panel.nameFieldStringValue = "SyncMaven_Logs.txt"
         panel.canCreateDirectories = true
         panel.allowedContentTypes = [.plainText]
 

@@ -10,7 +10,7 @@ final class GoogleDriveManager: NSObject {
     private var uploadSession: URLSession!
     
     private var uploadTasks: [Int: ResumableUploadTask] = [:]
-    private let stateQueue = DispatchQueue(label: "com.sinclo.driveState")
+    private let stateQueue = DispatchQueue(label: "com.SyncMaven.driveState")
 
     private override init() {
         super.init()

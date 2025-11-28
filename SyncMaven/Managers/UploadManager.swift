@@ -1,6 +1,6 @@
 //
 //  UploadState.swift
-//  Sinclo
+//  SyncMaven
 //
 //  Created by Rafael Zieganpalg on 26/11/25.
 //
@@ -40,7 +40,7 @@ final class UploadManager: ObservableObject {
     static let shared = UploadManager()
 
     @Published private(set) var uploads: [UUID: UploadRecord] = [:]
-    private let queue = DispatchQueue(label: "com.sinclo.uploadmanager", qos: .utility)
+    private let queue = DispatchQueue(label: "com.SyncMaven.uploadmanager", qos: .utility)
     private let semaphore = DispatchSemaphore(value: 2)
 
     private init() {}

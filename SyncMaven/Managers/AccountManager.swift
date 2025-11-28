@@ -1,13 +1,13 @@
 //
 // AccountManager.swift
-// Sinclo
+// SyncMaven
 //
 
 import Foundation
 import Combine
 import AppKit
 
-public struct SincloAccount: Codable, Identifiable, Equatable {
+public struct SyncMavenAccount: Codable, Identifiable, Equatable {
     public let id: String
     public var email: String
     public var name: String?
@@ -24,11 +24,11 @@ final class AccountManager: ObservableObject {
         }
     }
 
-    @Published private(set) var accounts: [SincloAccount] = []
+    @Published private(set) var accounts: [SyncMavenAccount] = []
 
-    private let metaKey = "Sinclo.Accounts"
-    private let legacyTokenKey = "Sinclo.GoogleDrive.Tokens" // older oauth path
-    private let keychainService = "Sinclo" // used if tokens saved to Keychain
+    private let metaKey = "SyncMaven.Accounts"
+    private let legacyTokenKey = "SyncMaven.GoogleDrive.Tokens" // older oauth path
+    private let keychainService = "SyncMaven" // used if tokens saved to Keychain
 
     // MARK: — Public API
 
@@ -43,7 +43,7 @@ final class AccountManager: ObservableObject {
                     AppState.shared.log("Account add failed: \(err.localizedDescription)")
                 case .success(let user):
                     let id = UUID().uuidString
-                    var acct = SincloAccount(id: id, email: user.email, name: user.name, avatarData: nil)
+                    var acct = SyncMavenAccount(id: id, email: user.email, name: user.name, avatarData: nil)
 
                     // Save tokens to Keychain for future safe storage (best-effort)
                     let tokenDict: [String: String?] = ["accessToken": accessToken, "refreshToken": refreshToken]
@@ -67,8 +67,8 @@ final class AccountManager: ObservableObject {
             }
         }
     }
-    private let legacyImportFlag = "Sinclo.LegacyImportCompleted"
-    func remove(account: SincloAccount) {
+    private let legacyImportFlag = "SyncMaven.LegacyImportCompleted"
+    func remove(account: SyncMavenAccount) {
         NSLog("[AccountManager] Removing account \(account.email) id=\(account.id)")
 
         // delete tokens
@@ -141,8 +141,8 @@ final class AccountManager: ObservableObject {
 
         NSLog("[AccountManager] importLegacyTokensNow() starting. existing accounts count = \(accounts.count)")
 
-        let legacyAccess = UserDefaults.standard.string(forKey: "Sinclo.AccessToken")
-        let legacyRefresh = UserDefaults.standard.string(forKey: "Sinclo.RefreshToken")
+        let legacyAccess = UserDefaults.standard.string(forKey: "SyncMaven.AccessToken")
+        let legacyRefresh = UserDefaults.standard.string(forKey: "SyncMaven.RefreshToken")
 
         guard let access = legacyAccess, let refresh = legacyRefresh else {
             NSLog("[AccountManager] No legacy tokens found — nothing to import.")
@@ -160,7 +160,7 @@ final class AccountManager: ObservableObject {
                 UserDefaults.standard.set(true, forKey: self.legacyImportFlag)
             case .success(let info):
                 let id = UUID().uuidString
-                var acc = SincloAccount(
+                var acc = SyncMavenAccount(
                     id: id,
                     email: info.email,
                     name: info.name,
@@ -169,7 +169,7 @@ final class AccountManager: ObservableObject {
 
                 // save tokens in Keychain
                 if let data = try? JSONEncoder().encode(tok) {
-                    KeychainHelper.shared.save(data: data, service: "Sinclo", account: "Account.\(id)")
+                    KeychainHelper.shared.save(data: data, service: "SyncMaven", account: "Account.\(id)")
                     NSLog("[AccountManager] Migrated tokens to Keychain for Account.\(id)")
                 }
 
@@ -188,8 +188,8 @@ final class AccountManager: ObservableObject {
                 }
 
                 // REMOVE legacy tokens so it CAN’T re-import again
-                UserDefaults.standard.removeObject(forKey: "Sinclo.AccessToken")
-                UserDefaults.standard.removeObject(forKey: "Sinclo.RefreshToken")
+                UserDefaults.standard.removeObject(forKey: "SyncMaven.AccessToken")
+                UserDefaults.standard.removeObject(forKey: "SyncMaven.RefreshToken")
 
                 // Mark import done forever
                 UserDefaults.standard.set(true, forKey: self.legacyImportFlag)
@@ -200,7 +200,7 @@ final class AccountManager: ObservableObject {
     }
 
         // ensure appendAndPersist is main-thread safe
-        private func appendAndPersist(_ acct: SincloAccount) {
+        private func appendAndPersist(_ acct: SyncMavenAccount) {
             DispatchQueue.main.async {
                 self.accounts.removeAll { $0.email.lowercased() == acct.email.lowercased() }
                 self.accounts.append(acct)
@@ -215,9 +215,9 @@ final class AccountManager: ObservableObject {
     }
 
     func load() {
-        if let data = UserDefaults.standard.data(forKey: "Sinclo.Accounts") {
+        if let data = UserDefaults.standard.data(forKey: "SyncMaven.Accounts") {
             do {
-                let decoded = try JSONDecoder().decode([SincloAccount].self, from: data)
+                let decoded = try JSONDecoder().decode([SyncMavenAccount].self, from: data)
                 accounts = decoded
                 NSLog("[AccountManager] Loaded \(accounts.count) accounts from metadata")
             } catch {
@@ -236,7 +236,7 @@ final class AccountManager: ObservableObject {
     private func saveMetadata() {
         do {
             let data = try JSONEncoder().encode(accounts)
-            UserDefaults.standard.set(data, forKey: "Sinclo.Accounts")
+            UserDefaults.standard.set(data, forKey: "SyncMaven.Accounts")
             NSLog("[AccountManager] saveMetadata() wrote \(accounts.count) accounts")
         } catch {
             NSLog("[AccountManager] saveMetadata() failed: \(error)")
@@ -269,7 +269,7 @@ final class AccountManager: ObservableObject {
                     AppState.shared.log("Import legacy tokens failed: \(err.localizedDescription)")
                 case .success(let user):
                     let id = UUID().uuidString
-                    var acct = SincloAccount(id: id, email: user.email, name: user.name, avatarData: nil)
+                    var acct = SyncMavenAccount(id: id, email: user.email, name: user.name, avatarData: nil)
                     // store tokens to keychain (migrate)
                     let tokenDict: [String: String?] = ["accessToken": accessToken, "refreshToken": refresh]
                     if let d = try? JSONEncoder().encode(tokenDict) {
@@ -300,7 +300,7 @@ final class AccountManager: ObservableObject {
         URLSession.shared.dataTask(with: req) { data, _, err in
             if let err = err { return completion(.failure(err)) }
             guard let data = data else {
-                return completion(.failure(NSError(domain: "Sinclo", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
+                return completion(.failure(NSError(domain: "SyncMaven", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
             }
 
             do {

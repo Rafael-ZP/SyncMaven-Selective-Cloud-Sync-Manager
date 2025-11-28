@@ -1,6 +1,6 @@
 //
 //  AppWindowView.swift
-//  Sinclo
+//  SyncMaven
 //
 //  Created by Rafael Zieganpalg on 26/11/25.
 //
@@ -21,13 +21,13 @@ struct AppWindowView: View {
                     .resizable()
                     .frame(width: 28, height: 28)
                     .cornerRadius(6)
-                Text("Sinclo")
+                Text("SyncMaven")
                     .font(.title2)
                     .bold()
                 Spacer()
                 Toggle(isOn: Binding(
-                    get: { UserDefaults.standard.bool(forKey: "Sinclo.ShowInDock") },
-                    set: { UserDefaults.standard.set($0, forKey: "Sinclo.ShowInDock"); NSApp.setActivationPolicy($0 ? .regular : .accessory) }
+                    get: { UserDefaults.standard.bool(forKey: "SyncMaven.ShowInDock") },
+                    set: { UserDefaults.standard.set($0, forKey: "SyncMaven.ShowInDock"); NSApp.setActivationPolicy($0 ? .regular : .accessory) }
                 )) {
                     Text("Show in Dock")
                 }

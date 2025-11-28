@@ -1,5 +1,5 @@
-// SincloApp.swift
-// Sinclo
+// SyncMavenApp.swift
+// SyncMaven
 
 internal import SwiftUI
 
@@ -13,7 +13,7 @@ struct SyncMaven: App {
         }
         .commands {
             CommandGroup(replacing: .appSettings) {
-                Button("Sinclo Settings...") {
+                Button("SyncMaven Settings...") {
                     // Safe access
                     MenuBarController.shared.showMainWindow()
                 }

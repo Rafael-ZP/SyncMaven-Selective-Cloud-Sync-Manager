@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Sinclo
+//  SyncMaven
 //
 //  Created by Rafael Zieganpalg on 24/11/25.
 //

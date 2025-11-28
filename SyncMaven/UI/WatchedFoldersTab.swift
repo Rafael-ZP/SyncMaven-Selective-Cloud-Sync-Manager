@@ -1,5 +1,5 @@
 // WatchedFoldersTab.swift
-// Sinclo
+// SyncMaven
 // Modern UI with Card Style
 
 internal import SwiftUI

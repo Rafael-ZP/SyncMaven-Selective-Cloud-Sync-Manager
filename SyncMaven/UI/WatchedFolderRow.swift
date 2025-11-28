@@ -1,5 +1,5 @@
 // WatchedFolderRow.swift
-// Sinclo
+// SyncMaven
 // Modern Row Design
 
 internal import SwiftUI

@@ -1,5 +1,5 @@
 // MenuBarController.swift
-// Sinclo
+// SyncMaven
 // Fixed: Singleton Logic & Layout Recursion
 
 import Cocoa
@@ -127,7 +127,7 @@ final class MenuBarController: NSObject, NSApplicationDelegate, NSPopoverDelegat
                     backing: .buffered,
                     defer: false
                 )
-                self.mainWindow?.title = "Sinclo Settings"
+                self.mainWindow?.title = "SyncMaven Settings"
                 self.mainWindow?.center()
                 self.mainWindow?.isReleasedWhenClosed = false
                 self.mainWindow?.contentView = NSHostingView(rootView: content)
@@ -144,7 +144,7 @@ final class MenuBarController: NSObject, NSApplicationDelegate, NSPopoverDelegat
     private func setupMenus() {
         rightClickMenu = NSMenu()
         
-        rightClickMenu.addItem(withTitle: "Open Sinclo Settings", action: #selector(openSettings), keyEquivalent: ",")
+        rightClickMenu.addItem(withTitle: "Open SyncMaven Settings", action: #selector(openSettings), keyEquivalent: ",")
         rightClickMenu.addItem(NSMenuItem.separator())
         
         let startItem = NSMenuItem(title: "Start Monitoring", action: #selector(startMonitoring), keyEquivalent: "")
@@ -158,7 +158,7 @@ final class MenuBarController: NSObject, NSApplicationDelegate, NSPopoverDelegat
         dockItem.tag = 99
         rightClickMenu.addItem(dockItem)
         
-        rightClickMenu.addItem(withTitle: "Quit Sinclo", action: #selector(quit), keyEquivalent: "q")
+        rightClickMenu.addItem(withTitle: "Quit SyncMaven", action: #selector(quit), keyEquivalent: "q")
         
         rightClickMenu.delegate = self
     }
@@ -199,8 +199,8 @@ final class MenuBarController: NSObject, NSApplicationDelegate, NSPopoverDelegat
     // MARK: SYNC EVENTS
     // ----------------------------------------------------------
     private func setupSyncListeners() {
-        NotificationCenter.default.addObserver(self, selector: #selector(startSync), name: Notification.Name("Sinclo.SyncStarted"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(stopSync), name: Notification.Name("Sinclo.SyncFinished"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startSync), name: Notification.Name("SyncMaven.SyncStarted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(stopSync), name: Notification.Name("SyncMaven.SyncFinished"), object: nil)
     }
 
     @objc private func startSync() {
