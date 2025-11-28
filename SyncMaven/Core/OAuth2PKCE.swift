@@ -30,8 +30,8 @@ final class OAuth2PKCE {
     // ------------------------------------------------------
     // SET YOUR GOOGLE DESKTOP CLIENT ID / SECRET (if any) HERE
     // ------------------------------------------------------
-    private let clientID = "426014651712-4qiheogmncb4id0cjmoevidngqdtjpk6.apps.googleusercontent.com"
-    private let clientSecret: String? = "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" // nil if public client
+    private let clientID = "426014651712-bs8fqlmf9i0fcn3vro0ucl8svolss0up.apps.googleusercontent.com"
+    private let clientSecret: String? = "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" // nil if public client
 
     // default scope used during interactive auth (open id + email + profile + drive)
     private let scope = [
