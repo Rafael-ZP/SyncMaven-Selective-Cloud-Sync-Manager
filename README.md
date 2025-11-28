@@ -1,6 +1,7 @@
 <p align="center">
   <a href="https://github.com/Rafael-ZP/SyncMaven-Selective-Cloud-Sync-Manager">
-    <img src="https://raw.githubusercontent.com/Rafael-ZP/SyncMaven-Selective-Cloud-Sync-Manager/main/SyncMaven/SyncMaven/Assets.xcassets/AppIcon.appiconset/Logo_02_128x128.png" alt="Logo" width="80" height="80">
+    <img src="<img width="1024" height="1024" alt="Logo_02_1024x1024" src="https://github.com/user-attachments/assets/4b93eb0a-6902-4ad4-b350-75f4b3a90dfc" />
+" alt="Logo" width="80" height="80">
   </a>
 </p>
 
@@ -52,13 +53,15 @@ The application's architecture is modular, with distinct components for managing
 ## Screenshots
 
 <p align="center">
-  <img src="placeholder.png" alt="Main Window Screenshot" width="400"/>
+  <img src="<img width="903" height="697" alt="image" src="https://github.com/user-attachments/assets/4a364f19-c241-487e-8e77-a3377422bb3a" />
+" alt="Main Window Screenshot" width="400"/>
   <br/>
   <em>Main application window showing watched folders.</em>
 </p>
 
 <p align="center">
-  <img src="placeholder.png" alt="Accounts Tab Screenshot" width="400"/>
+  <img src="<img width="916" height="694" alt="Screenshot 2025-11-28 at 20 23 49" src="https://github.com/user-attachments/assets/861ab838-9529-44f7-9d56-65d85606fc8a" />
+" alt="Accounts Tab Screenshot" width="400"/>
   <br/>
   <em>Accounts tab for managing cloud accounts.</em>
 </p>
