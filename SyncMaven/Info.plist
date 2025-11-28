@@ -8,10 +8,9 @@
 	<string></string>
 	<key>NSUserNotificationUsageDescription</key>
 	<string></string>
-	<key>LSUIElement</key>
-	<false/>
 	<key>CFBundleIdentifier</key>
-	<string>&lt;key&gt;LSUIElement&lt;/key&gt;
-&lt;string&gt;1&lt;/string&gt;</string>
+	<string>com.your-username.SyncMaven</string>
+	<key>LSUIElement</key>
+	<true/>
 </dict>
 </plist>

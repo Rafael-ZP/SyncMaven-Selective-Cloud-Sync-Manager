@@ -167,7 +167,7 @@
 			name = SyncMaven;
 			packageProductDependencies = (
 			);
-			productName = Sinclo;
+			productName = SyncMaven;
 			productReference = FF4D10FC2ED4A7A900EC4A1A /* SyncMaven.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -502,7 +502,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelzieganpalg.syncmaven;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.your-username.SyncMaven";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
