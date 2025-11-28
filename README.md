@@ -52,15 +52,13 @@ The application's architecture is modular, with distinct components for managing
 ## Screenshots
 
 <p align="center">
-  <img src="<img width="903" height="697" alt="image" src="https://github.com/user-attachments/assets/4a364f19-c241-487e-8e77-a3377422bb3a" />
-" alt="Main Window Screenshot" width="400"/>
+  <img src="https://github.com/user-attachments/assets/4a364f19-c241-487e-8e77-a3377422bb3a" alt="Main Window Screenshot" width="400"/>
   <br/>
   <em>Main application window showing watched folders.</em>
 </p>
 
 <p align="center">
-  <img src="<img width="916" height="694" alt="Screenshot 2025-11-28 at 20 23 49" src="https://github.com/user-attachments/assets/861ab838-9529-44f7-9d56-65d85606fc8a" />
-" alt="Accounts Tab Screenshot" width="400"/>
+  <img src="https://github.com/user-attachments/assets/861ab838-9529-44f7-9d56-65d85606fc8a" alt="Accounts Tab Screenshot" width="400"/>
   <br/>
   <em>Accounts tab for managing cloud accounts.</em>
 </p>
