@@ -1,7 +1,6 @@
 <p align="center">
   <a href="https://github.com/Rafael-ZP/SyncMaven-Selective-Cloud-Sync-Manager">
-    <img src="https://github.com/user-attachments/assets/4b93eb0a-6902-4ad4-b350-75f4b3a90dfc" />
-" alt="Logo" width="80" height="80">
+    <img src="https://github.com/user-attachments/assets/4b93eb0a-6902-4ad4-b350-75f4b3a90dfc" alt="Logo" width="80" height="80">
   </a>
 </p>
 
