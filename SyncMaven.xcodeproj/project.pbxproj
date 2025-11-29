@@ -31,7 +31,7 @@
 /* Begin PBXFileReference section */
 		FF300A8C2ED9CB1C00227CAF /* SyncMavenUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyncMavenUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF300A992ED9CB4700227CAF /* SyncMavenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyncMavenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF4D10FC2ED4A7A900EC4A1A /* SyncMaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyncMaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF4D10FC2ED4A7A900EC4A1A /* SyncMaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SyncMaven.app; path = /Users/rafaelzieganpalg/Projects/SyncMaven/SyncMaven/build/Debug/SyncMaven.app; sourceTree = "<absolute>"; };
 		FFBCB5DF2ED4A29200C4B848 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FFC2936D2ED6FDA9009B46EB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,7 +90,6 @@
 				FFBCB58D2ED49DB900C4B848 /* SyncMaven */,
 				FFBCB5DB2ED4A26D00C4B848 /* scripts */,
 				FFBCB5DF2ED4A29200C4B848 /* README.md */,
-				FF4D10FC2ED4A7A900EC4A1A /* SyncMaven.app */,
 				FFC2936D2ED6FDA9009B46EB /* AppState.swift */,
 				FF300A8C2ED9CB1C00227CAF /* SyncMavenUnitTests.xctest */,
 				FF300A8D2ED9CB1C00227CAF /* SyncMavenTests */,
@@ -490,7 +489,6 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L84VC34VHP;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_PREVIEWS = YES;
@@ -501,7 +499,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.your-username.SyncMaven";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -524,7 +522,6 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L84VC34VHP;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_PREVIEWS = YES;
@@ -535,7 +532,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelzieganpalg.syncmaven;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
